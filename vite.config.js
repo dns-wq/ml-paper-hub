@@ -6,6 +6,7 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [react()],
+    base: mode === 'production' ? '/ml-paper-hub/' : '/',
     server: {
       proxy: {
         '/api/anthropic': {

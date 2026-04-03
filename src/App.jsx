@@ -11,6 +11,7 @@ import PaperDetail from './components/PaperDetail/PaperDetail.jsx';
 import AddPaperModal from './components/AddPaperModal.jsx';
 import CompareView from './components/CompareView.jsx';
 import ThemeToggle from './components/ThemeToggle.jsx';
+import SettingsModal from './components/SettingsModal.jsx';
 
 const DEFAULT_FILTERS = { query: '', difficulty: [], source: [], sort: 'category' };
 
@@ -20,6 +21,7 @@ export default function App() {
   const [generatedContent, setGeneratedContent] = usePersistedState('generatedContent', {});
   const [selectedPaper, setSelectedPaper] = useState(null);
   const [showAddModal, setShowAddModal] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
   const [filters, setFilters] = useState(DEFAULT_FILTERS);
   const [compareFrom, setCompareFrom] = useState(null);
   const [theme, setTheme] = usePersistedState('theme', 'light');
@@ -200,6 +202,7 @@ export default function App() {
             onImport={handleImport}
             theme={theme}
             onToggleTheme={() => setTheme(t => t === 'light' ? 'dark' : 'light')}
+            onSettings={() => setShowSettings(true)}
           />
           <SearchBar filters={filters} onFiltersChange={setFilters} />
           <PaperList
@@ -218,6 +221,10 @@ export default function App() {
           onAdd={(paper) => setPapers(prev => [...prev, paper])}
           onClose={() => setShowAddModal(false)}
         />
+      )}
+
+      {showSettings && (
+        <SettingsModal onClose={() => setShowSettings(false)} />
       )}
     </div>
   );

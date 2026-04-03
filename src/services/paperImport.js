@@ -5,6 +5,13 @@
  * Semantic Scholar API: Free (rate-limited), returns JSON with citation data.
  */
 
+// In dev, use Vite proxy to avoid CORS. In production, call APIs directly.
+const isDev = import.meta.env.DEV;
+const ARXIV_BASE = isDev ? '/api/arxiv' : 'https://export.arxiv.org';
+const S2_BASE = isDev ? '/api/s2' : 'https://api.semanticscholar.org';
+const OPENALEX_BASE = isDev ? '/api/openalex' : 'https://api.openalex.org';
+const DBLP_BASE = isDev ? '/api/dblp' : 'https://dblp.org';
+
 function extractArxivId(url) {
   // Matches: arxiv.org/abs/1706.03762, arxiv.org/pdf/1706.03762, arxiv.org/abs/1706.03762v3
   const match = url.match(/arxiv\.org\/(?:abs|pdf)\/(\d{4}\.\d{4,5}(?:v\d+)?)/);
@@ -23,7 +30,7 @@ export async function fetchArxivMetadata(url) {
   const arxivId = extractArxivId(url);
   if (!arxivId) return null;
 
-  const apiUrl = `/api/arxiv/api/query?id_list=${arxivId}`;
+  const apiUrl = `${ARXIV_BASE}/api/query?id_list=${arxivId}`;
   const response = await fetch(apiUrl);
   if (!response.ok) throw new Error(`arXiv API error: ${response.status}`);
 
@@ -68,9 +75,9 @@ export async function fetchSemanticScholarMetadata(url) {
   let apiUrl;
 
   if (arxivId) {
-    apiUrl = `/api/s2/graph/v1/paper/ARXIV:${arxivId}`;
+    apiUrl = `${S2_BASE}/graph/v1/paper/ARXIV:${arxivId}`;
   } else {
-    apiUrl = `/api/s2/graph/v1/paper/URL:${encodeURIComponent(url)}`;
+    apiUrl = `${S2_BASE}/graph/v1/paper/URL:${encodeURIComponent(url)}`;
   }
 
   const fields = 'title,authors,abstract,year,citationCount,referenceCount,fieldsOfStudy,externalIds';
@@ -157,7 +164,7 @@ async function searchSemanticScholar(query) {
     fields: 'title,authors,abstract,year,citationCount,externalIds,fieldsOfStudy'
   });
 
-  const response = await fetch(`/api/s2/graph/v1/paper/search?${params}`);
+  const response = await fetch(`${S2_BASE}/graph/v1/paper/search?${params}`);
   if (!response.ok) throw new Error(`Semantic Scholar search failed: ${response.status}`);
 
   const data = await response.json();
@@ -190,7 +197,7 @@ async function searchOpenAlex(query) {
     select: 'id,title,authorships,publication_year,cited_by_count,primary_location,abstract_inverted_index,concepts,language'
   });
 
-  const response = await fetch(`/api/openalex/works?${params}`);
+  const response = await fetch(`${OPENALEX_BASE}/works?${params}`);
   if (!response.ok) throw new Error(`OpenAlex search failed: ${response.status}`);
 
   const data = await response.json();
@@ -226,7 +233,7 @@ async function searchDblp(query) {
     h: '10', // max results
   });
 
-  const response = await fetch(`/api/dblp/search/publ/api?${params}`);
+  const response = await fetch(`${DBLP_BASE}/search/publ/api?${params}`);
   if (!response.ok) throw new Error(`DBLP search failed: ${response.status}`);
 
   const data = await response.json();

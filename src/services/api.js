@@ -1,5 +1,32 @@
-const API_URL = '/api/anthropic/v1/messages';
+const ANTHROPIC_DIRECT_URL = 'https://api.anthropic.com/v1/messages';
+const PROXY_URL = '/api/anthropic/v1/messages';
 const MODEL = 'claude-sonnet-4-20250514';
+
+/**
+ * Determine whether to use the Vite dev proxy or direct browser calls.
+ * In dev mode, the proxy handles auth. In production (GitHub Pages),
+ * the user provides their own API key stored in localStorage.
+ */
+function getApiConfig() {
+  const userKey = localStorage.getItem('anthropic_api_key');
+  if (userKey) {
+    // Direct browser call with user's own key (works via CORS)
+    return {
+      url: ANTHROPIC_DIRECT_URL,
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': userKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      }
+    };
+  }
+  // Dev proxy — the proxy injects the API key server-side
+  return {
+    url: PROXY_URL,
+    headers: { 'Content-Type': 'application/json' }
+  };
+}
 
 const LANGUAGE_NAMES = {
   en: 'English',
@@ -30,9 +57,11 @@ export async function callClaude(prompt, maxTokens = 2500, { jsonResponse = fals
   const langInstruction = getLanguageInstruction(jsonResponse);
   const fullPrompt = prompt + langInstruction;
 
-  const response = await fetch(API_URL, {
+  const { url, headers } = getApiConfig();
+
+  const response = await fetch(url, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers,
     body: JSON.stringify({
       model: MODEL,
       max_tokens: maxTokens,

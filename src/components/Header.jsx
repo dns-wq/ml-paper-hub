@@ -1,10 +1,10 @@
 import { useRef } from 'react';
-import { BookOpen, Plus, Download, Upload } from 'lucide-react';
+import { BookOpen, Plus, Download, Upload, Settings } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import ThemeToggle from './ThemeToggle.jsx';
 import LanguagePicker from './LanguagePicker.jsx';
 
-export default function Header({ stats, onAddPaper, onExport, onImport, theme, onToggleTheme }) {
+export default function Header({ stats, onAddPaper, onExport, onImport, theme, onToggleTheme, onSettings }) {
   const { t } = useTranslation();
   const fileInputRef = useRef(null);
 
@@ -41,6 +41,9 @@ export default function Header({ stats, onAddPaper, onExport, onImport, theme, o
         <div className="header-actions">
           <LanguagePicker />
           <ThemeToggle theme={theme} onToggle={onToggleTheme} />
+          <button className="icon-btn" onClick={onSettings} title="Settings">
+            <Settings size={16} />
+          </button>
           <button className="icon-btn" onClick={onExport} title={t('header.export')}>
             <Download size={16} />
           </button>
