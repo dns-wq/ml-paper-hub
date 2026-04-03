@@ -1,11 +1,15 @@
-import { useState, useEffect } from 'react';
-import { Book, Brain, FlaskConical, HelpCircle, MessageCircle, ExternalLink, Target, Check, Loader2, Trash2 } from 'lucide-react';
+import { useState, useEffect, useCallback } from 'react';
+import { Book, Brain, FlaskConical, HelpCircle, MessageCircle, ExternalLink, Target, Check, Loader2, Trash2, Dna, GraduationCap, Scale, FlaskRound } from 'lucide-react';
 import DifficultyStars from '../common/DifficultyStars.jsx';
 import SummaryTab from './SummaryTab.jsx';
 import TheoryTab from './TheoryTab.jsx';
 import FindingsTab from './FindingsTab.jsx';
 import QuizTab from './QuizTab.jsx';
 import QuestionsTab from './QuestionsTab.jsx';
+import DnaTab from './DnaTab.jsx';
+import FeynmanTab from './FeynmanTab.jsx';
+import ClaimsTab from './ClaimsTab.jsx';
+import AblationTab from './AblationTab.jsx';
 
 export default function PaperDetail({
   paper,
@@ -26,13 +30,15 @@ export default function PaperDetail({
   resetChat,
   onBack,
   onDelete,
-  setProgress
+  setProgress,
+  onUpdateContent
 }) {
   const [activeTab, setActiveTab] = useState('summary');
   const paperProgress = progress[paper.id] || {};
 
   useEffect(() => {
-    if (!content[activeTab] && activeTab !== 'quiz' && activeTab !== 'questions') {
+    const autoGenerateTabs = ['summary', 'theory', 'findings'];
+    if (autoGenerateTabs.includes(activeTab) && !content[activeTab]) {
       generateContent(paper, activeTab);
     }
   }, [paper.id, activeTab]);
@@ -47,8 +53,20 @@ export default function PaperDetail({
     onBack();
   };
 
+  const handleDnaGenerated = useCallback((dna) => {
+    onUpdateContent(paper.id, 'dna', dna);
+  }, [paper.id, onUpdateContent]);
+
+  const handleClaimsGenerated = useCallback((claims) => {
+    onUpdateContent(paper.id, 'claims', claims);
+  }, [paper.id, onUpdateContent]);
+
+  const handleAblationsGenerated = useCallback((ablations) => {
+    onUpdateContent(paper.id, 'ablations', ablations);
+  }, [paper.id, onUpdateContent]);
+
   const renderContent = () => {
-    if (isGenerating && activeTab !== 'questions') {
+    if (isGenerating && !['questions', 'dna', 'feynman', 'claims', 'ablation'].includes(activeTab)) {
       return (
         <div className="loading-state">
           <Loader2 className="spin" size={32} />
@@ -59,54 +77,23 @@ export default function PaperDetail({
 
     switch (activeTab) {
       case 'summary':
-        return (
-          <SummaryTab
-            content={content.summary}
-            onGenerate={() => generateContent(paper, 'summary')}
-          />
-        );
+        return <SummaryTab content={content.summary} onGenerate={() => generateContent(paper, 'summary')} />;
       case 'theory':
-        return (
-          <TheoryTab
-            content={content.theory}
-            isGenerating={isGenerating}
-            onGenerate={() => generateContent(paper, 'theory')}
-            onLoadMore={() => generateContent(paper, 'theory', true)}
-          />
-        );
+        return <TheoryTab content={content.theory} isGenerating={isGenerating} onGenerate={() => generateContent(paper, 'theory')} onLoadMore={() => generateContent(paper, 'theory', true)} />;
       case 'findings':
-        return (
-          <FindingsTab
-            content={content.findings}
-            isGenerating={isGenerating}
-            onGenerate={() => generateContent(paper, 'findings')}
-            onLoadMore={() => generateContent(paper, 'findings', true)}
-          />
-        );
+        return <FindingsTab content={content.findings} isGenerating={isGenerating} onGenerate={() => generateContent(paper, 'findings')} onLoadMore={() => generateContent(paper, 'findings', true)} />;
       case 'quiz':
-        return (
-          <QuizTab
-            quiz={content.quiz}
-            quizState={quizState}
-            isGenerating={isGenerating}
-            onGenerate={() => generateContent(paper, 'quiz')}
-            onLoadMore={() => generateContent(paper, 'quiz', true)}
-            onSetAnswer={setAnswer}
-            onSubmit={() => handleQuizSubmit(content.quiz, paper.id, progress, setProgress)}
-            onReset={resetQuiz}
-          />
-        );
+        return <QuizTab quiz={content.quiz} quizState={quizState} isGenerating={isGenerating} onGenerate={() => generateContent(paper, 'quiz')} onLoadMore={() => generateContent(paper, 'quiz', true)} onSetAnswer={setAnswer} onSubmit={() => handleQuizSubmit(content.quiz, paper.id, progress, setProgress)} onReset={resetQuiz} />;
       case 'questions':
-        return (
-          <QuestionsTab
-            chatMessages={chatMessages}
-            chatInput={chatInput}
-            isChatLoading={isChatLoading}
-            chatEndRef={chatEndRef}
-            onInputChange={setChatInput}
-            onSubmit={(q) => askQuestion(paper, q)}
-          />
-        );
+        return <QuestionsTab chatMessages={chatMessages} chatInput={chatInput} isChatLoading={isChatLoading} chatEndRef={chatEndRef} onInputChange={setChatInput} onSubmit={(q) => askQuestion(paper, q)} />;
+      case 'dna':
+        return <DnaTab dna={content.dna} onDnaGenerated={handleDnaGenerated} paper={paper} />;
+      case 'feynman':
+        return <FeynmanTab paper={paper} dna={content.dna} onDnaGenerated={handleDnaGenerated} />;
+      case 'claims':
+        return <ClaimsTab claims={content.claims} onClaimsGenerated={handleClaimsGenerated} paper={paper} />;
+      case 'ablation':
+        return <AblationTab ablations={content.ablations} onAblationsGenerated={handleAblationsGenerated} paper={paper} />;
       default:
         return null;
     }
@@ -119,15 +106,7 @@ export default function PaperDetail({
           &larr; Back to Papers
         </button>
         {paper.source === 'user' && (
-          <button
-            className="delete-btn"
-            onClick={() => {
-              if (window.confirm(`Delete "${paper.title}"?`)) {
-                onDelete(paper.id);
-                onBack();
-              }
-            }}
-          >
+          <button className="delete-btn" onClick={() => { if (window.confirm(`Delete "${paper.title}"?`)) { onDelete(paper.id); onBack(); } }}>
             <Trash2 size={14} /> Delete
           </button>
         )}
@@ -148,7 +127,6 @@ export default function PaperDetail({
           )}
         </div>
         <p className="abstract">{paper.abstract}</p>
-
         {paperProgress.bestScore !== undefined && (
           <div className="progress-badge">
             <Target size={14} />
@@ -159,21 +137,42 @@ export default function PaperDetail({
       </div>
 
       <div className="tabs">
-        <button className={activeTab === 'summary' ? 'active' : ''} onClick={() => setActiveTab('summary')}>
-          <Book size={16} /> Summary
-        </button>
-        <button className={activeTab === 'theory' ? 'active' : ''} onClick={() => setActiveTab('theory')}>
-          <Brain size={16} /> Theory
-        </button>
-        <button className={activeTab === 'findings' ? 'active' : ''} onClick={() => setActiveTab('findings')}>
-          <FlaskConical size={16} /> Findings
-        </button>
-        <button className={activeTab === 'quiz' ? 'active' : ''} onClick={() => { setActiveTab('quiz'); resetQuiz(); }}>
-          <HelpCircle size={16} /> Quiz
-        </button>
-        <button className={activeTab === 'questions' ? 'active' : ''} onClick={() => setActiveTab('questions')}>
-          <MessageCircle size={16} /> Questions
-        </button>
+        <div className="tab-group">
+          <span className="tab-group-label">Study</span>
+          <button className={activeTab === 'summary' ? 'active' : ''} onClick={() => setActiveTab('summary')}>
+            <Book size={14} /> Summary
+          </button>
+          <button className={activeTab === 'theory' ? 'active' : ''} onClick={() => setActiveTab('theory')}>
+            <Brain size={14} /> Theory
+          </button>
+          <button className={activeTab === 'findings' ? 'active' : ''} onClick={() => setActiveTab('findings')}>
+            <FlaskConical size={14} /> Findings
+          </button>
+        </div>
+        <div className="tab-group">
+          <span className="tab-group-label">Deep Dive</span>
+          <button className={activeTab === 'dna' ? 'active' : ''} onClick={() => setActiveTab('dna')}>
+            <Dna size={14} /> DNA
+          </button>
+          <button className={activeTab === 'claims' ? 'active' : ''} onClick={() => setActiveTab('claims')}>
+            <Scale size={14} /> Claims
+          </button>
+          <button className={activeTab === 'ablation' ? 'active' : ''} onClick={() => setActiveTab('ablation')}>
+            <FlaskRound size={14} /> What If?
+          </button>
+        </div>
+        <div className="tab-group">
+          <span className="tab-group-label">Practice</span>
+          <button className={activeTab === 'feynman' ? 'active' : ''} onClick={() => setActiveTab('feynman')}>
+            <GraduationCap size={14} /> Feynman
+          </button>
+          <button className={activeTab === 'quiz' ? 'active' : ''} onClick={() => { setActiveTab('quiz'); resetQuiz(); }}>
+            <HelpCircle size={14} /> Quiz
+          </button>
+          <button className={activeTab === 'questions' ? 'active' : ''} onClick={() => setActiveTab('questions')}>
+            <MessageCircle size={14} /> Q&A
+          </button>
+        </div>
       </div>
 
       <div className="tab-content">

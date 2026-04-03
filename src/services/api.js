@@ -216,6 +216,159 @@ CITATIONS:
 If the question cannot be answered from the provided context, say so clearly. Be precise and cite specific sentences.`;
 }
 
+// --- Phase 3: Deep Study Features ---
+
+export function buildDnaPrompt(paper) {
+  return `You are an expert researcher. Extract a structured "Paper DNA" fingerprint for this paper.
+
+Title: ${paper.title}
+Authors: ${paper.authors}
+Year: ${paper.year}
+Abstract: ${paper.abstract}
+
+Return a JSON object with these fields:
+{
+  "concepts": ["key concept 1", "key concept 2", ...],
+  "methods": ["method or technique 1", "method 2", ...],
+  "datasets": ["dataset 1", "dataset 2", ...],
+  "metrics": ["metric: value", ...],
+  "prerequisites": ["concept you should know before reading", ...],
+  "contributions": ["what this paper introduces that is new", ...],
+  "limitations": ["acknowledged limitation 1", ...],
+  "applications": ["practical application or use case", ...]
+}
+
+Be specific and concise — each item should be 2-8 words. Include 3-8 items per field. Leave empty arrays [] for fields with no relevant content. Return ONLY valid JSON.`;
+}
+
+export function buildFeynmanPrompt(paper, concept, userExplanation) {
+  return `You are a patient, rigorous ML educator using the Feynman technique. A student just tried to explain a concept from this paper in their own words. Evaluate their explanation.
+
+Paper: "${paper.title}" by ${paper.authors} (${paper.year})
+Abstract: ${paper.abstract}
+
+Concept they were asked to explain: "${concept}"
+
+Student's explanation:
+"${userExplanation}"
+
+Evaluate on three axes and provide specific, constructive feedback:
+
+1. **Accuracy** — Did they get anything factually wrong? Be specific about what's incorrect.
+2. **Completeness** — What key aspects did they miss? What would make their explanation more complete?
+3. **Clarity** — Would a smart non-expert understand this? What could be clearer?
+
+Then provide:
+4. **Rating** — One of: "excellent", "good", "needs_work", "incorrect"
+5. **Improved explanation** — A concise, correct version in 2-3 sentences.
+
+Format as JSON:
+{
+  "accuracy": "feedback text",
+  "completeness": "feedback text",
+  "clarity": "feedback text",
+  "rating": "excellent|good|needs_work|incorrect",
+  "improved": "the correct concise explanation"
+}
+
+Be encouraging but honest. Point out specific gaps, don't just say "good job." Return ONLY valid JSON.`;
+}
+
+export function buildClaimsPrompt(paper) {
+  return `You are an expert critical reader. Extract and classify every significant claim from this paper.
+
+Title: ${paper.title}
+Authors: ${paper.authors}
+Year: ${paper.year}
+Abstract: ${paper.abstract}
+
+For each claim, classify its evidence strength:
+- "empirical": Directly demonstrated with experiments/data in this paper
+- "cited": Supported by citing prior work
+- "assumed": Stated without evidence or citation
+- "speculative": Future work, hypothesis, or conjecture
+
+Return JSON:
+{
+  "claims": [
+    {
+      "claim": "concise statement of the claim",
+      "evidence": "empirical|cited|assumed|speculative",
+      "context": "which section/aspect of the paper this relates to",
+      "note": "brief note on the supporting evidence or why it's classified this way"
+    }
+  ]
+}
+
+Extract 8-15 significant claims. Focus on the paper's core arguments, not trivial statements like "we use Python." Return ONLY valid JSON.`;
+}
+
+export function buildAblationPrompt(paper, customQuestion) {
+  if (customQuestion) {
+    return `You are an expert ML researcher analyzing design decisions in this paper.
+
+Paper: "${paper.title}" by ${paper.authors} (${paper.year})
+Abstract: ${paper.abstract}
+
+The user asks this "what if?" question:
+"${customQuestion}"
+
+Provide a thorough analysis:
+1. **Likely effect** — What would probably happen?
+2. **Trade-offs** — What would be gained vs. lost?
+3. **Prior work** — Has anyone tried this? What happened?
+4. **Deeper reason** — Why did the authors make their original choice?
+
+Be specific and cite relevant work where possible. Keep it to 200-300 words.`;
+  }
+
+  return `You are an expert ML researcher. Identify the key design decisions in this paper and generate counterfactual analyses.
+
+Title: ${paper.title}
+Authors: ${paper.authors}
+Year: ${paper.year}
+Abstract: ${paper.abstract}
+
+Return JSON with the paper's key decisions and what-if analyses:
+{
+  "decisions": [
+    {
+      "decision": "concise description of the design choice",
+      "category": "architecture|loss_function|training|data|evaluation",
+      "what_if": "what would likely happen with a different choice",
+      "why_chosen": "why the authors made this specific choice",
+      "alternatives_tried": "whether anyone has tried alternatives (be specific)"
+    }
+  ]
+}
+
+Identify 5-8 key decisions. Focus on choices that materially affect the paper's results, not trivial implementation details. Return ONLY valid JSON.`;
+}
+
+export function buildComparisonPrompt(paperA, paperB) {
+  return `You are an expert ML researcher. Compare these two papers side by side.
+
+Paper A: "${paperA.title}" by ${paperA.authors} (${paperA.year})
+Abstract: ${paperA.abstract}
+
+Paper B: "${paperB.title}" by ${paperB.authors} (${paperB.year})
+Abstract: ${paperB.abstract}
+
+Provide a structured comparison in JSON:
+{
+  "shared_concepts": ["concepts both papers address"],
+  "approach_differences": [
+    {"aspect": "aspect name", "paper_a": "A's approach", "paper_b": "B's approach"}
+  ],
+  "performance_comparison": "which performs better and on what (if comparable)",
+  "historical_context": "how these papers relate chronologically and intellectually",
+  "when_to_use": {"paper_a": "when you'd prefer A's approach", "paper_b": "when you'd prefer B's approach"},
+  "synthesis": "what you learn by reading both that you wouldn't from either alone"
+}
+
+Return ONLY valid JSON.`;
+}
+
 export function parseQuizResponse(text, existingQuestions) {
   const jsonMatch = text.match(/\{[\s\S]*\}/);
   if (!jsonMatch) return existingQuestions ? { questions: existingQuestions } : { questions: [] };

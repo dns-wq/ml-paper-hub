@@ -168,6 +168,12 @@ export default function App() {
           onBack={() => setSelectedPaper(null)}
           onDelete={handleDeletePaper}
           setProgress={setProgress}
+          onUpdateContent={(paperId, field, value) => {
+            setGeneratedContent(prev => ({
+              ...prev,
+              [paperId]: { ...prev[paperId], [field]: value }
+            }));
+          }}
         />
       ) : (
         <>

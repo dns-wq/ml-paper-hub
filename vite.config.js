@@ -31,6 +31,16 @@ export default defineConfig(({ mode }) => {
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api\/s2/, ''),
         },
+        '/api/openalex': {
+          target: 'https://api.openalex.org',
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api\/openalex/, ''),
+        },
+        '/api/dblp': {
+          target: 'https://dblp.org',
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api\/dblp/, ''),
+        },
       },
     },
   };

@@ -1,12 +1,19 @@
 import { useState } from 'react';
-import { Search, Link, FileText, Loader2, AlertCircle, Plus } from 'lucide-react';
+import { Search, Link, FileText, Loader2, AlertCircle, Plus, Globe } from 'lucide-react';
 import { CATEGORIES, DIFFICULTY_LABELS } from '../data/papers.js';
 import { importPaper, searchPapers } from '../services/paperImport.js';
+
+const SEARCH_PROVIDERS = [
+  { id: 'semantic_scholar', label: 'Semantic Scholar', description: '225M+ papers, AI-ranked relevance' },
+  { id: 'openalex', label: 'OpenAlex', description: '450M+ works, strong international coverage' },
+  { id: 'dblp', label: 'DBLP', description: 'CS conferences & journals including CCF-ranked' },
+];
 
 export default function AddPaperModal({ onAdd, onClose }) {
   const [mode, setMode] = useState('search');
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [provider, setProvider] = useState('semantic_scholar');
   const [url, setUrl] = useState('');
   const [manual, setManual] = useState({
     title: '', authors: '', year: '', abstract: '',
@@ -23,9 +30,9 @@ export default function AddPaperModal({ onAdd, onClose }) {
     setSearchResults([]);
 
     try {
-      const results = await searchPapers(searchQuery.trim());
+      const results = await searchPapers(searchQuery.trim(), provider);
       if (results.length === 0) {
-        setError('No papers found. Try different keywords.');
+        setError('No papers found. Try different keywords or another source.');
       } else {
         setSearchResults(results);
       }
@@ -37,7 +44,9 @@ export default function AddPaperModal({ onAdd, onClose }) {
   };
 
   const handleAddFromSearch = (paper) => {
-    onAdd(paper);
+    // Remove internal _provider field before adding
+    const { _provider, ...cleanPaper } = paper;
+    onAdd(cleanPaper);
     onClose();
   };
 
@@ -95,10 +104,23 @@ export default function AddPaperModal({ onAdd, onClose }) {
 
         {mode === 'search' && (
           <div className="search-form">
+            <div className="provider-selector">
+              {SEARCH_PROVIDERS.map(p => (
+                <button
+                  key={p.id}
+                  className={`provider-btn ${provider === p.id ? 'active' : ''}`}
+                  onClick={() => { setProvider(p.id); setSearchResults([]); setError(null); }}
+                  title={p.description}
+                >
+                  {p.label}
+                </button>
+              ))}
+            </div>
+
             <form className="search-input-row" onSubmit={handleSearch}>
               <input
                 type="text"
-                placeholder="Search papers by title or keyword..."
+                placeholder={`Search ${SEARCH_PROVIDERS.find(p => p.id === provider)?.label}...`}
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
                 autoFocus
@@ -122,14 +144,26 @@ export default function AddPaperModal({ onAdd, onClose }) {
                     <div className="search-result-info">
                       <div className="search-result-title">{paper.title}</div>
                       <div className="search-result-meta">
-                        {paper.authors} {paper.year && `\u00B7 ${paper.year}`}
+                        {paper.authors}
+                        {paper.year && ` \u00B7 ${paper.year}`}
                         {paper.citationCount > 0 && ` \u00B7 ${paper.citationCount} citations`}
+                        {paper.venue && ` \u00B7 ${paper.venue}`}
+                        {paper.language && paper.language !== 'en' && (
+                          <span className="lang-badge">
+                            <Globe size={10} /> {paper.language.toUpperCase()}
+                          </span>
+                        )}
                       </div>
                       {paper.abstract && (
                         <div className="search-result-abstract">
                           {paper.abstract.length > 200
                             ? paper.abstract.slice(0, 200) + '...'
                             : paper.abstract}
+                        </div>
+                      )}
+                      {!paper.abstract && paper._provider === 'DBLP' && (
+                        <div className="search-result-abstract" style={{ fontStyle: 'italic' }}>
+                          DBLP does not provide abstracts — paper will be added with metadata only.
                         </div>
                       )}
                     </div>
@@ -147,7 +181,9 @@ export default function AddPaperModal({ onAdd, onClose }) {
 
             {!loading && searchResults.length === 0 && !error && (
               <p className="url-hint">
-                Search Semantic Scholar's database of 200M+ papers. Click + to add a result.
+                {provider === 'semantic_scholar' && 'Search 225M+ papers with AI-powered relevance ranking.'}
+                {provider === 'openalex' && 'Search 450M+ scholarly works with strong international and multilingual coverage.'}
+                {provider === 'dblp' && 'Search CS conferences and journals, including CCF-ranked Chinese venues (NLPCC, CCL, etc.).'}
               </p>
             )}
           </div>

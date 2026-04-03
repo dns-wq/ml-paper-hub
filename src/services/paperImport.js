@@ -138,10 +138,19 @@ export async function importPaper(url) {
 }
 
 /**
- * Search for papers by keyword/title using Semantic Scholar.
- * Returns up to 10 results with metadata.
+ * Multi-source paper search. Searches the selected provider.
+ * Providers: 'semantic_scholar', 'openalex', 'dblp'
  */
-export async function searchPapers(query) {
+export async function searchPapers(query, provider = 'semantic_scholar') {
+  switch (provider) {
+    case 'openalex': return searchOpenAlex(query);
+    case 'dblp': return searchDblp(query);
+    case 'semantic_scholar':
+    default: return searchSemanticScholar(query);
+  }
+}
+
+async function searchSemanticScholar(query) {
   const params = new URLSearchParams({
     query,
     limit: '10',
@@ -149,7 +158,7 @@ export async function searchPapers(query) {
   });
 
   const response = await fetch(`/api/s2/graph/v1/paper/search?${params}`);
-  if (!response.ok) throw new Error(`Search failed: ${response.status}`);
+  if (!response.ok) throw new Error(`Semantic Scholar search failed: ${response.status}`);
 
   const data = await response.json();
   if (!data.data?.length) return [];
@@ -170,7 +179,98 @@ export async function searchPapers(query) {
     category: guessCategory(paper.fieldsOfStudy || [], paper.title, paper.abstract),
     difficulty: 3,
     source: 'user',
+    _provider: 'Semantic Scholar',
   }));
+}
+
+async function searchOpenAlex(query) {
+  const params = new URLSearchParams({
+    search: query,
+    per_page: '10',
+    select: 'id,title,authorships,publication_year,cited_by_count,primary_location,abstract_inverted_index,concepts,language'
+  });
+
+  const response = await fetch(`/api/openalex/works?${params}`);
+  if (!response.ok) throw new Error(`OpenAlex search failed: ${response.status}`);
+
+  const data = await response.json();
+  if (!data.results?.length) return [];
+
+  return data.results.map(work => {
+    const authors = (work.authorships || []).map(a => a.author?.display_name).filter(Boolean);
+    const abstract = invertedIndexToText(work.abstract_inverted_index);
+    const concepts = (work.concepts || []).map(c => c.display_name);
+    const url = work.primary_location?.landing_page_url || work.id;
+
+    return {
+      id: generatePaperId(work.title || 'untitled'),
+      title: work.title || 'Untitled',
+      authors: formatAuthors(authors),
+      year: work.publication_year || null,
+      abstract,
+      url,
+      citationCount: work.cited_by_count,
+      category: guessCategory(concepts, work.title || '', abstract),
+      difficulty: 3,
+      source: 'user',
+      language: work.language || null,
+      _provider: 'OpenAlex',
+    };
+  });
+}
+
+async function searchDblp(query) {
+  const params = new URLSearchParams({
+    q: query,
+    format: 'json',
+    h: '10', // max results
+  });
+
+  const response = await fetch(`/api/dblp/search/publ/api?${params}`);
+  if (!response.ok) throw new Error(`DBLP search failed: ${response.status}`);
+
+  const data = await response.json();
+  const hits = data.result?.hits?.hit;
+  if (!hits?.length) return [];
+
+  return hits.map(hit => {
+    const info = hit.info || {};
+    const authors = Array.isArray(info.authors?.author)
+      ? info.authors.author.map(a => typeof a === 'string' ? a : a.text)
+      : info.authors?.author ? [typeof info.authors.author === 'string' ? info.authors.author : info.authors.author.text] : [];
+
+    const venue = info.venue || '';
+    const title = info.title?.replace(/\.$/, '') || 'Untitled';
+
+    return {
+      id: generatePaperId(title),
+      title,
+      authors: formatAuthors(authors),
+      year: info.year ? parseInt(info.year) : null,
+      abstract: '', // DBLP doesn't provide abstracts
+      url: info.ee || info.url || '',
+      venue,
+      category: guessCategory([], title, venue),
+      difficulty: 3,
+      source: 'user',
+      _provider: 'DBLP',
+    };
+  });
+}
+
+/**
+ * Convert OpenAlex inverted abstract index to plain text.
+ * OpenAlex stores abstracts as {word: [positions]} for compression.
+ */
+function invertedIndexToText(invertedIndex) {
+  if (!invertedIndex) return '';
+  const words = [];
+  for (const [word, positions] of Object.entries(invertedIndex)) {
+    for (const pos of positions) {
+      words[pos] = word;
+    }
+  }
+  return words.join(' ');
 }
 
 // --- Helpers ---
