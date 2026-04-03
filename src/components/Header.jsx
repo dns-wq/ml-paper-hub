@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import ThemeToggle from './ThemeToggle.jsx';
 import LanguagePicker from './LanguagePicker.jsx';
 
-export default function Header({ stats, onAddPaper, onExport, onImport, theme, onToggleTheme, onSettings }) {
+export default function Header({ stats, onAddPaper, onExport, onImport, theme, onToggleTheme, onSettings, onShowDashboard }) {
   const { t } = useTranslation();
   const fileInputRef = useRef(null);
 
@@ -24,7 +24,7 @@ export default function Header({ stats, onAddPaper, onExport, onImport, theme, o
     <header className="header">
       <h1><BookOpen size={22} /> {t('app.title')}</h1>
       <div className="header-right">
-        <div className="stats-bar">
+        <div className="stats-bar clickable" onClick={onShowDashboard} title="View progress dashboard">
           <div className="stat">
             <div className="stat-value">{stats.completed}/{stats.total}</div>
             <div className="stat-label">{t('header.completed')}</div>

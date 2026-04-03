@@ -12,6 +12,7 @@ import AddPaperModal from './components/AddPaperModal.jsx';
 import CompareView from './components/CompareView.jsx';
 import ThemeToggle from './components/ThemeToggle.jsx';
 import SettingsModal from './components/SettingsModal.jsx';
+import ProgressDashboard from './components/ProgressDashboard.jsx';
 
 const DEFAULT_FILTERS = { query: '', difficulty: [], source: [], sort: 'category' };
 
@@ -22,6 +23,7 @@ export default function App() {
   const [selectedPaper, setSelectedPaper] = useState(null);
   const [showAddModal, setShowAddModal] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
+  const [showDashboard, setShowDashboard] = useState(false);
   const [filters, setFilters] = useState(DEFAULT_FILTERS);
   const [compareFrom, setCompareFrom] = useState(null);
   const [theme, setTheme] = usePersistedState('theme', 'light');
@@ -31,7 +33,7 @@ export default function App() {
     document.documentElement.setAttribute('data-theme', theme);
   }
 
-  const { isGenerating, generateContent } = usePaperContent(generatedContent, setGeneratedContent);
+  const { isGenerating, isGeneratingType, generateContent, prefetchStudyTabs } = usePaperContent(generatedContent, setGeneratedContent);
   const { quizState, setAnswer, handleQuizSubmit, resetQuiz } = useQuiz();
   const { chatMessages, chatInput, setChatInput, isChatLoading, chatEndRef, resetChat, askQuestion } = useChat(generatedContent);
 
@@ -158,7 +160,14 @@ export default function App() {
 
   return (
     <div className="app">
-      {compareFrom ? (
+      {showDashboard ? (
+        <ProgressDashboard
+          papers={papers}
+          progress={progress}
+          generatedContent={generatedContent}
+          onBack={() => setShowDashboard(false)}
+        />
+      ) : compareFrom ? (
         <CompareView
           paperA={compareFrom}
           papers={papers}
@@ -170,7 +179,9 @@ export default function App() {
           content={generatedContent[selectedPaper.id] || {}}
           progress={progress}
           isGenerating={isGenerating}
+          isGeneratingType={isGeneratingType}
           generateContent={generateContent}
+          prefetchStudyTabs={prefetchStudyTabs}
           quizState={quizState}
           setAnswer={setAnswer}
           handleQuizSubmit={handleQuizSubmit}
@@ -203,6 +214,7 @@ export default function App() {
             theme={theme}
             onToggleTheme={() => setTheme(t => t === 'light' ? 'dark' : 'light')}
             onSettings={() => setShowSettings(true)}
+            onShowDashboard={() => setShowDashboard(true)}
           />
           <SearchBar filters={filters} onFiltersChange={setFilters} />
           <PaperList

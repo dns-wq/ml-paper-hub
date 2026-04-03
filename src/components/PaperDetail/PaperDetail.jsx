@@ -16,7 +16,9 @@ export default function PaperDetail({
   content,
   progress,
   isGenerating,
+  isGeneratingType,
   generateContent,
+  prefetchStudyTabs,
   quizState,
   setAnswer,
   handleQuizSubmit,
@@ -37,12 +39,10 @@ export default function PaperDetail({
   const [activeTab, setActiveTab] = useState('summary');
   const paperProgress = progress[paper.id] || {};
 
+  // Pre-load all 3 study tabs in parallel when paper opens
   useEffect(() => {
-    const autoGenerateTabs = ['summary', 'theory', 'findings'];
-    if (autoGenerateTabs.includes(activeTab) && !content[activeTab]) {
-      generateContent(paper, activeTab);
-    }
-  }, [paper.id, activeTab]);
+    prefetchStudyTabs(paper);
+  }, [paper.id]);
 
   useEffect(() => {
     resetChat();
@@ -67,22 +67,22 @@ export default function PaperDetail({
   }, [paper.id, onUpdateContent]);
 
   const renderContent = () => {
-    if (isGenerating && !['questions', 'dna', 'feynman', 'claims', 'ablation'].includes(activeTab)) {
-      return (
-        <div className="loading-state">
-          <Loader2 className="spin" size={32} />
-          <p>Generating content...</p>
-        </div>
-      );
-    }
-
     switch (activeTab) {
       case 'summary':
+        if (isGeneratingType('summary') && !content.summary) {
+          return <div className="loading-state"><Loader2 className="spin" size={32} /><p>Generating summary...</p></div>;
+        }
         return <SummaryTab content={content.summary} onGenerate={() => generateContent(paper, 'summary')} />;
       case 'theory':
-        return <TheoryTab content={content.theory} isGenerating={isGenerating} onGenerate={() => generateContent(paper, 'theory')} onLoadMore={() => generateContent(paper, 'theory', true)} />;
+        if (isGeneratingType('theory') && !content.theory) {
+          return <div className="loading-state"><Loader2 className="spin" size={32} /><p>Generating theory...</p></div>;
+        }
+        return <TheoryTab content={content.theory} isGenerating={isGeneratingType('theory')} onGenerate={() => generateContent(paper, 'theory')} onLoadMore={() => generateContent(paper, 'theory', true)} />;
       case 'findings':
-        return <FindingsTab content={content.findings} isGenerating={isGenerating} onGenerate={() => generateContent(paper, 'findings')} onLoadMore={() => generateContent(paper, 'findings', true)} />;
+        if (isGeneratingType('findings') && !content.findings) {
+          return <div className="loading-state"><Loader2 className="spin" size={32} /><p>Generating findings...</p></div>;
+        }
+        return <FindingsTab content={content.findings} isGenerating={isGeneratingType('findings')} onGenerate={() => generateContent(paper, 'findings')} onLoadMore={() => generateContent(paper, 'findings', true)} />;
       case 'quiz':
         return <QuizTab quiz={content.quiz} quizState={quizState} isGenerating={isGenerating} onGenerate={() => generateContent(paper, 'quiz')} onLoadMore={() => generateContent(paper, 'quiz', true)} onSetAnswer={setAnswer} onSubmit={() => handleQuizSubmit(content.quiz, paper.id, progress, setProgress)} onReset={resetQuiz} />;
       case 'questions':
@@ -145,15 +145,17 @@ export default function PaperDetail({
       <div className="tabs">
         <div className="tab-group">
           <span className="tab-group-label">Study</span>
-          <button className={activeTab === 'summary' ? 'active' : ''} onClick={() => setActiveTab('summary')}>
-            <Book size={14} /> Summary
-          </button>
-          <button className={activeTab === 'theory' ? 'active' : ''} onClick={() => setActiveTab('theory')}>
-            <Brain size={14} /> Theory
-          </button>
-          <button className={activeTab === 'findings' ? 'active' : ''} onClick={() => setActiveTab('findings')}>
-            <FlaskConical size={14} /> Findings
-          </button>
+          {[
+            { key: 'summary', icon: <Book size={14} />, label: 'Summary' },
+            { key: 'theory', icon: <Brain size={14} />, label: 'Theory' },
+            { key: 'findings', icon: <FlaskConical size={14} />, label: 'Findings' },
+          ].map(tab => (
+            <button key={tab.key} className={activeTab === tab.key ? 'active' : ''} onClick={() => setActiveTab(tab.key)}>
+              {tab.icon} {tab.label}
+              {isGeneratingType(tab.key) && !content[tab.key] && <Loader2 className="spin tab-loader" size={10} />}
+              {content[tab.key] && <span className="tab-ready" />}
+            </button>
+          ))}
         </div>
         <div className="tab-group">
           <span className="tab-group-label">Deep Dive</span>

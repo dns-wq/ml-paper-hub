@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import {
   callClaude,
   buildSummaryPrompt,
@@ -9,10 +9,19 @@ import {
 } from '../services/api.js';
 
 export default function usePaperContent(generatedContent, setGeneratedContent) {
-  const [isGenerating, setIsGenerating] = useState(false);
+  const [generating, setGenerating] = useState({});
+  const activeRequests = useRef({});
+
+  const isGenerating = Object.values(generating).some(Boolean);
+  const isGeneratingType = (type) => !!generating[type];
 
   const generateContent = useCallback(async (paper, contentType, append = false) => {
-    setIsGenerating(true);
+    // Prevent duplicate requests for same paper+type
+    const key = `${paper.id}:${contentType}`;
+    if (activeRequests.current[key]) return;
+    activeRequests.current[key] = true;
+
+    setGenerating(prev => ({ ...prev, [contentType]: true }));
 
     const existingContent = generatedContent[paper.id]?.[contentType];
 
@@ -48,9 +57,20 @@ export default function usePaperContent(generatedContent, setGeneratedContent) {
     } catch (error) {
       console.error('API Error:', error);
     } finally {
-      setIsGenerating(false);
+      setGenerating(prev => ({ ...prev, [contentType]: false }));
+      delete activeRequests.current[key];
     }
   }, [generatedContent, setGeneratedContent]);
 
-  return { isGenerating, generateContent };
+  /**
+   * Pre-load Summary, Theory, and Findings in parallel.
+   * Skips any that are already cached.
+   */
+  const prefetchStudyTabs = useCallback((paper) => {
+    const cached = generatedContent[paper.id] || {};
+    const toFetch = ['summary', 'theory', 'findings'].filter(type => !cached[type]);
+    toFetch.forEach(type => generateContent(paper, type));
+  }, [generatedContent, generateContent]);
+
+  return { isGenerating, isGeneratingType, generateContent, prefetchStudyTabs };
 }
