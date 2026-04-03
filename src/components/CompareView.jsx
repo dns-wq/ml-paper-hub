@@ -20,7 +20,7 @@ export default function CompareView({ paperA, papers, onBack }) {
     setPaperB(selected);
     setLoading(true);
     try {
-      const text = await callClaude(buildComparisonPrompt(paperA, selected), 3000);
+      const text = await callClaude(buildComparisonPrompt(paperA, selected), 3000, { jsonResponse: true });
       const match = text.match(/\{[\s\S]*\}/);
       if (match) {
         setComparison(JSON.parse(match[0]));

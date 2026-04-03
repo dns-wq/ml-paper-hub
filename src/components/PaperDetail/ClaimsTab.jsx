@@ -16,7 +16,7 @@ export default function ClaimsTab({ claims, onClaimsGenerated, paper }) {
   const handleGenerate = async () => {
     setLoading(true);
     try {
-      const text = await callClaude(buildClaimsPrompt(paper), 3000);
+      const text = await callClaude(buildClaimsPrompt(paper), 3000, { jsonResponse: true });
       const match = text.match(/\{[\s\S]*\}/);
       if (match) {
         const parsed = JSON.parse(match[0]);

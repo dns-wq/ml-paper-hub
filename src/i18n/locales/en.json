@@ -1,0 +1,152 @@
+{
+  "app": {
+    "title": "Paper Hub"
+  },
+  "header": {
+    "completed": "Completed",
+    "avgScore": "Avg Score",
+    "quizzes": "Quizzes",
+    "addPaper": "Add Paper",
+    "export": "Export data",
+    "import": "Import data",
+    "lightMode": "Switch to light mode",
+    "darkMode": "Switch to dark mode"
+  },
+  "search": {
+    "placeholder": "Search papers by title, author, or keyword...",
+    "filters": "Filters",
+    "difficulty": "Difficulty",
+    "source": "Source",
+    "sortBy": "Sort by",
+    "category": "Category",
+    "titleAZ": "Title A-Z",
+    "yearNewest": "Year (newest)",
+    "yearOldest": "Year (oldest)",
+    "clearFilters": "Clear all filters",
+    "showing": "Showing {{count}} of {{total}} papers",
+    "noResults": "No papers match your search. Try different keywords or clear filters."
+  },
+  "difficulty": {
+    "1": "Beginner",
+    "2": "Intermediate",
+    "3": "Advanced",
+    "4": "Expert",
+    "5": "Research"
+  },
+  "addModal": {
+    "title": "Add New Paper",
+    "search": "Search",
+    "fromUrl": "From URL",
+    "manual": "Manual",
+    "searchPlaceholder": "Search {{provider}}...",
+    "urlPlaceholder": "Paste arXiv URL, Semantic Scholar URL, or paper link...",
+    "importPaper": "Import Paper",
+    "fetchingMetadata": "Fetching metadata...",
+    "noPapersFound": "No papers found. Try different keywords or another source.",
+    "s2Hint": "Search 225M+ papers with AI-powered relevance ranking.",
+    "openalexHint": "Search 450M+ scholarly works with strong international and multilingual coverage.",
+    "dblpHint": "Search CS conferences and journals, including CCF-ranked Chinese venues (NLPCC, CCL, etc.).",
+    "urlHint": "Supports arXiv and Semantic Scholar URLs. Automatically fetches title, authors, abstract, and citation data.",
+    "dblpNoAbstract": "DBLP does not provide abstracts — paper will be added with metadata only.",
+    "citations": "{{count}} citations"
+  },
+  "detail": {
+    "backToPapers": "Back to Papers",
+    "compare": "Compare",
+    "delete": "Delete",
+    "original": "Original",
+    "bestScore": "Best Score: {{score}}%"
+  },
+  "tabs": {
+    "study": "Study",
+    "deepDive": "Deep Dive",
+    "practice": "Practice",
+    "summary": "Summary",
+    "theory": "Theory",
+    "findings": "Findings",
+    "dna": "DNA",
+    "claims": "Claims",
+    "whatIf": "What If?",
+    "feynman": "Feynman",
+    "quiz": "Quiz",
+    "qa": "Q&A"
+  },
+  "content": {
+    "generateSummary": "Generate Summary",
+    "generateTheory": "Generate Theory Deep Dive",
+    "generateFindings": "Generate Key Findings",
+    "generateQuiz": "Generate Quiz",
+    "loadMore": "Load More",
+    "generatingContent": "Generating content...",
+    "extractDna": "Extract Paper DNA",
+    "extractingDna": "Extracting Paper DNA...",
+    "extractClaims": "Extract Claims",
+    "extractingClaims": "Extracting and classifying claims...",
+    "analyzeDecisions": "Analyze Design Decisions",
+    "analyzingDecisions": "Analyzing design decisions..."
+  },
+  "feynman": {
+    "title": "Feynman Mode",
+    "description": "Test your understanding by explaining concepts in your own words. The AI evaluates your accuracy, completeness, and clarity.",
+    "loadConcepts": "Load Concepts",
+    "loadingConcepts": "Loading concepts...",
+    "pickConcept": "Pick a concept to explain",
+    "pickDescription": "Choose a concept from this paper and explain it as if teaching a smart undergrad.",
+    "explain": "Explain:",
+    "writePrompt": "Write your explanation as if teaching someone who is smart but unfamiliar with this paper.",
+    "placeholder": "Type your explanation here...",
+    "submit": "Submit Explanation",
+    "evaluating": "Evaluating...",
+    "pickDifferent": "Pick Different Concept",
+    "tryAnother": "Try Another Concept",
+    "accuracy": "Accuracy",
+    "completeness": "Completeness",
+    "clarity": "Clarity",
+    "modelExplanation": "Model Explanation",
+    "excellent": "Excellent",
+    "good": "Good",
+    "needsWork": "Needs Work",
+    "incorrect": "Incorrect"
+  },
+  "quiz": {
+    "score": "Score: {{score}}%",
+    "passed": "Passed!",
+    "needToPass": "Need 70% to pass",
+    "retry": "Retry",
+    "submitQuiz": "Submit Quiz",
+    "addMore": "Add More Questions ({{count}} total)",
+    "yourAnswer": "Your answer...",
+    "correct": "Correct: {{answer}}"
+  },
+  "chat": {
+    "askQuestion": "Ask questions about this paper",
+    "citationHint": "Answers will include citations to specific sentences",
+    "placeholder": "Ask a question about this paper...",
+    "analyzing": "Analyzing paper..."
+  },
+  "ablation": {
+    "askOwn": "Ask your own \"What if?\"",
+    "placeholder": "What if they used a different activation function?"
+  },
+  "compare": {
+    "title": "Compare Papers",
+    "selectPrompt": "Select a paper to compare with:",
+    "paperA": "Paper A",
+    "paperB": "Paper B",
+    "pickFromLibrary": "Paper B — pick from your library",
+    "filterPapers": "Filter papers...",
+    "comparison": "Paper Comparison",
+    "generating": "Generating comparison analysis...",
+    "sharedConcepts": "Shared Concepts",
+    "approachDifferences": "Approach Differences",
+    "performance": "Performance",
+    "historicalContext": "Historical Context",
+    "whenToUse": "When to Use Each",
+    "synthesis": "Synthesis",
+    "noMatch": "No matching papers found."
+  },
+  "language": {
+    "en": "English",
+    "zh": "中文"
+  }
+}

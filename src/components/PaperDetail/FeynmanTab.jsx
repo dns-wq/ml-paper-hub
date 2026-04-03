@@ -40,7 +40,7 @@ export default function FeynmanTab({ paper, dna, onDnaGenerated }) {
     setFeedback(null);
 
     try {
-      const text = await callClaude(buildFeynmanPrompt(paper, concept, explanation.trim()), 1500);
+      const text = await callClaude(buildFeynmanPrompt(paper, concept, explanation.trim()), 1500, { jsonResponse: true });
       const match = text.match(/\{[\s\S]*\}/);
       if (match) {
         setFeedback(JSON.parse(match[0]));

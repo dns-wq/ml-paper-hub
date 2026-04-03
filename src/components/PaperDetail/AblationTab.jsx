@@ -20,7 +20,7 @@ export default function AblationTab({ ablations, onAblationsGenerated, paper }) 
   const handleGenerate = async () => {
     setLoading(true);
     try {
-      const text = await callClaude(buildAblationPrompt(paper), 3000);
+      const text = await callClaude(buildAblationPrompt(paper), 3000, { jsonResponse: true });
       const match = text.match(/\{[\s\S]*\}/);
       if (match) {
         const parsed = JSON.parse(match[0]);

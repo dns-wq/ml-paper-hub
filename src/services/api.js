@@ -1,14 +1,34 @@
 const API_URL = '/api/anthropic/v1/messages';
 const MODEL = 'claude-sonnet-4-20250514';
 
-export async function callClaude(prompt, maxTokens = 2500) {
+const LANGUAGE_NAMES = { en: 'English', zh: 'Chinese (Simplified)' };
+
+/**
+ * Returns an instruction to append to prompts when the user's language isn't English.
+ * For JSON prompts, asks Claude to keep JSON keys in English but translate values.
+ */
+export function getLanguageInstruction(isJsonResponse = false) {
+  const lang = localStorage.getItem('language') || 'en';
+  if (lang === 'en') return '';
+  const langName = LANGUAGE_NAMES[lang] || lang;
+  if (isJsonResponse) {
+    return `\n\nIMPORTANT: Keep all JSON keys in English, but write all text values (explanations, descriptions, claims, etc.) in ${langName}.`;
+  }
+  return `\n\nIMPORTANT: Write your entire response in ${langName}.`;
+}
+
+export async function callClaude(prompt, maxTokens = 2500, { jsonResponse = false } = {}) {
+  // Append language instruction if user isn't using English
+  const langInstruction = getLanguageInstruction(jsonResponse);
+  const fullPrompt = prompt + langInstruction;
+
   const response = await fetch(API_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       model: MODEL,
       max_tokens: maxTokens,
-      messages: [{ role: 'user', content: prompt }]
+      messages: [{ role: 'user', content: fullPrompt }]
     })
   });
 

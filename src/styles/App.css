@@ -6,35 +6,37 @@
 
 .app {
   min-height: 100vh;
-  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-tertiary) 100%);
+  background: var(--bg-primary);
   color: var(--text-primary);
   font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* Header */
 .header {
-  padding: 2rem 3rem;
-  background: var(--bg-overlay);
+  padding: 1rem 2rem;
+  background: var(--bg-header);
   border-bottom: 1px solid var(--border-light);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: var(--shadow-sm);
 }
 
 .header h1 {
-  font-size: 1.8rem;
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
   font-weight: 700;
-  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-green));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--text-primary);
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.5rem;
 }
 
 .header h1 svg {
-  color: var(--accent-cyan);
-  -webkit-text-fill-color: initial;
+  color: var(--accent-primary);
 }
 
 .header-right {
@@ -53,9 +55,9 @@
 }
 
 .stat-value {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 700;
-  color: var(--accent-green);
+  color: var(--accent-primary);
 }
 
 .stat-label {
@@ -66,23 +68,23 @@
 }
 
 .add-paper-btn {
-  padding: 0.75rem 1.5rem;
-  background: linear-gradient(135deg, rgba(0, 217, 255, 0.2), rgba(0, 255, 136, 0.2));
-  border: 1px solid rgba(0, 217, 255, 0.33);
-  border-radius: var(--radius-lg);
-  color: var(--accent-green);
+  padding: 0.5rem 1rem;
+  background: var(--accent-primary);
+  border: none;
+  border-radius: var(--radius-md);
+  color: #fff;
   font-family: inherit;
-  font-weight: 600;
+  font-size: 0.85rem;
+  font-weight: 500;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  transition: all 0.2s;
+  gap: 0.4rem;
+  transition: all 0.15s;
 }
 
 .add-paper-btn:hover {
-  background: linear-gradient(135deg, rgba(0, 217, 255, 0.27), rgba(0, 255, 136, 0.27));
-  transform: translateY(-2px);
+  opacity: 0.9;
 }
 
 /* Header actions */
@@ -109,6 +111,44 @@
 .icon-btn:hover {
   background: rgba(255, 255, 255, 0.1);
   color: var(--text-primary);
+}
+
+/* Language Picker */
+.lang-picker {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.2rem;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+}
+
+.lang-picker svg {
+  margin: 0 0.25rem;
+}
+
+.lang-option {
+  padding: 0.25rem 0.5rem;
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.lang-option:hover {
+  color: var(--text-primary);
+}
+
+.lang-option.active {
+  background: var(--accent-primary-light);
+  color: var(--accent-primary);
+  font-weight: 600;
 }
 
 /* Search Bar */
@@ -350,23 +390,23 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 1rem 1.25rem;
+  padding: 0.75rem 1rem;
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  margin-bottom: 0.5rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 0.35rem;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.15s;
 }
 
 .paper-card:hover {
   background: var(--bg-card-hover);
-  border-color: var(--cyan-30);
-  transform: translateX(4px);
+  border-color: var(--border-medium);
+  box-shadow: var(--shadow-sm);
 }
 
 .paper-card.completed {
-  border-left: 3px solid var(--accent-green);
+  border-left: 3px solid var(--accent-success);
 }
 
 .paper-info {
@@ -440,10 +480,12 @@
 }
 
 .paper-header h1 {
-  font-size: 2rem;
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
   font-weight: 700;
-  margin-bottom: 1rem;
-  line-height: 1.3;
+  margin-bottom: 0.75rem;
+  line-height: 1.35;
+  color: var(--text-primary);
 }
 
 .paper-meta {
@@ -562,21 +604,20 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 1rem 2rem;
-  background: linear-gradient(135deg, rgba(0, 217, 255, 0.13), rgba(0, 255, 136, 0.13));
-  border: 1px solid rgba(0, 217, 255, 0.27);
+  padding: 0.75rem 1.5rem;
+  background: var(--accent-primary-light);
+  border: 1px solid var(--accent-primary-medium);
   border-radius: var(--radius-md);
-  color: var(--accent-green);
+  color: var(--accent-primary);
   font-family: inherit;
-  font-size: 1rem;
+  font-size: 0.9rem;
   cursor: pointer;
   margin: 2rem auto;
-  transition: all 0.2s;
+  transition: all 0.15s;
 }
 
 .generate-btn:hover {
-  background: linear-gradient(135deg, rgba(0, 217, 255, 0.2), rgba(0, 255, 136, 0.2));
-  transform: scale(1.02);
+  background: var(--accent-primary-medium);
 }
 
 /* Loading */
@@ -729,21 +770,20 @@
 
 .submit-quiz {
   flex: 1;
-  padding: 1rem;
-  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-green));
+  padding: 0.75rem;
+  background: var(--accent-primary);
   border: none;
-  border-radius: var(--radius-lg);
-  color: #000;
+  border-radius: var(--radius-md);
+  color: #fff;
   font-family: inherit;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.15s;
 }
 
 .submit-quiz:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 20px rgba(0, 255, 136, 0.3);
+  opacity: 0.9;
 }
 
 /* Chat */
@@ -858,13 +898,13 @@
 }
 
 .chat-input-form button {
-  padding: 0.875rem 1.25rem;
-  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-green));
+  padding: 0.7rem 1rem;
+  background: var(--accent-primary);
   border: none;
-  border-radius: var(--radius-lg);
-  color: #000;
+  border-radius: var(--radius-md);
+  color: #fff;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.15s;
 }
 
 .chat-input-form button:disabled {
@@ -890,10 +930,11 @@
 .modal {
   background: var(--bg-secondary);
   border: 1px solid var(--border-light);
-  border-radius: 16px;
-  padding: 2rem;
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
   width: 90%;
   max-width: 500px;
+  box-shadow: var(--shadow-lg);
 }
 
 .modal h2 {
@@ -935,11 +976,11 @@
 }
 
 .url-form input, .manual-form input, .manual-form select, .manual-form textarea {
-  padding: 0.75rem 1rem;
-  background: rgba(0, 0, 0, 0.3);
+  padding: 0.65rem 0.75rem;
+  background: var(--bg-input);
   border: 1px solid var(--border-medium);
   border-radius: var(--radius-md);
-  color: #fff;
+  color: var(--text-primary);
   font-family: inherit;
 }
 
@@ -949,13 +990,13 @@
 }
 
 .url-form button, .manual-form button {
-  padding: 1rem;
-  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-green));
+  padding: 0.75rem;
+  background: var(--accent-primary);
   border: none;
   border-radius: var(--radius-md);
-  color: #000;
+  color: #fff;
   font-family: inherit;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -1360,10 +1401,10 @@
 
 .ablation-custom-input button {
   padding: 0.65rem 1rem;
-  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-green));
+  background: var(--accent-primary);
   border: none;
   border-radius: var(--radius-md);
-  color: #000;
+  color: #fff;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -1414,14 +1455,14 @@
 
 .search-input-row button {
   padding: 0.75rem 1rem;
-  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-green));
+  background: var(--accent-primary);
   border: none;
   border-radius: var(--radius-md);
-  color: #000;
+  color: #fff;
   cursor: pointer;
   display: flex;
   align-items: center;
-  transition: all 0.2s;
+  transition: all 0.15s;
 }
 
 .search-input-row button:disabled {
@@ -1478,22 +1519,21 @@
 .add-result-btn {
   flex-shrink: 0;
   align-self: center;
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, rgba(0, 217, 255, 0.2), rgba(0, 255, 136, 0.2));
-  border: 1px solid rgba(0, 217, 255, 0.33);
+  background: var(--accent-primary-light);
+  border: 1px solid var(--accent-primary-medium);
   border-radius: 50%;
-  color: var(--accent-green);
+  color: var(--accent-primary);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.15s;
 }
 
 .add-result-btn:hover {
-  transform: scale(1.1);
-  background: linear-gradient(135deg, rgba(0, 217, 255, 0.3), rgba(0, 255, 136, 0.3));
+  background: var(--accent-primary-medium);
 }
 
 /* Compare button in detail view */

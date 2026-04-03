@@ -1,0 +1,152 @@
+{
+  "app": {
+    "title": "论文中心"
+  },
+  "header": {
+    "completed": "已完成",
+    "avgScore": "平均分",
+    "quizzes": "测验",
+    "addPaper": "添加论文",
+    "export": "导出数据",
+    "import": "导入数据",
+    "lightMode": "切换到浅色模式",
+    "darkMode": "切换到深色模式"
+  },
+  "search": {
+    "placeholder": "按标题、作者或关键词搜索论文...",
+    "filters": "筛选",
+    "difficulty": "难度",
+    "source": "来源",
+    "sortBy": "排序方式",
+    "category": "分类",
+    "titleAZ": "标题 A-Z",
+    "yearNewest": "年份（最新）",
+    "yearOldest": "年份（最早）",
+    "clearFilters": "清除所有筛选",
+    "showing": "显示 {{total}} 篇中的 {{count}} 篇",
+    "noResults": "没有匹配的论文。请尝试其他关键词或清除筛选条件。"
+  },
+  "difficulty": {
+    "1": "入门",
+    "2": "中级",
+    "3": "高级",
+    "4": "专家",
+    "5": "研究级"
+  },
+  "addModal": {
+    "title": "添加新论文",
+    "search": "搜索",
+    "fromUrl": "通过链接",
+    "manual": "手动添加",
+    "searchPlaceholder": "搜索 {{provider}}...",
+    "urlPlaceholder": "粘贴 arXiv 链接、Semantic Scholar 链接或论文网址...",
+    "importPaper": "导入论文",
+    "fetchingMetadata": "正在获取元数据...",
+    "noPapersFound": "未找到论文。请尝试不同的关键词或其他数据源。",
+    "s2Hint": "搜索 2.25 亿多篇论文，AI 智能排序。",
+    "openalexHint": "搜索 4.5 亿多篇学术著作，国际和多语言覆盖广泛。",
+    "dblpHint": "搜索计算机科学会议和期刊，包括 CCF 推荐的中文会议（NLPCC、CCL 等）。",
+    "urlHint": "支持 arXiv 和 Semantic Scholar 链接。自动获取标题、作者、摘要和引用数据。",
+    "dblpNoAbstract": "DBLP 不提供摘要——论文将仅添加元数据。",
+    "citations": "{{count}} 次引用"
+  },
+  "detail": {
+    "backToPapers": "返回论文列表",
+    "compare": "对比",
+    "delete": "删除",
+    "original": "原文",
+    "bestScore": "最高分：{{score}}%"
+  },
+  "tabs": {
+    "study": "学习",
+    "deepDive": "深入研究",
+    "practice": "练习",
+    "summary": "摘要",
+    "theory": "理论",
+    "findings": "发现",
+    "dna": "DNA",
+    "claims": "论点",
+    "whatIf": "假设分析",
+    "feynman": "费曼",
+    "quiz": "测验",
+    "qa": "问答"
+  },
+  "content": {
+    "generateSummary": "生成摘要",
+    "generateTheory": "生成理论深度分析",
+    "generateFindings": "生成关键发现",
+    "generateQuiz": "生成测验",
+    "loadMore": "加载更多",
+    "generatingContent": "正在生成内容...",
+    "extractDna": "提取论文 DNA",
+    "extractingDna": "正在提取论文 DNA...",
+    "extractClaims": "提取论点",
+    "extractingClaims": "正在提取和分类论点...",
+    "analyzeDecisions": "分析设计决策",
+    "analyzingDecisions": "正在分析设计决策..."
+  },
+  "feynman": {
+    "title": "费曼模式",
+    "description": "用自己的话解释概念来测试理解程度。AI 将从准确性、完整性和清晰度三个方面评估你的解释。",
+    "loadConcepts": "加载概念",
+    "loadingConcepts": "正在加载概念...",
+    "pickConcept": "选择一个概念来解释",
+    "pickDescription": "选择论文中的一个概念，像教一个聪明的本科生那样解释它。",
+    "explain": "解释：",
+    "writePrompt": "写下你的解释，假设对方聪明但不了解这篇论文。",
+    "placeholder": "在这里输入你的解释...",
+    "submit": "提交解释",
+    "evaluating": "正在评估...",
+    "pickDifferent": "选择其他概念",
+    "tryAnother": "尝试另一个概念",
+    "accuracy": "准确性",
+    "completeness": "完整性",
+    "clarity": "清晰度",
+    "modelExplanation": "模型解释",
+    "excellent": "优秀",
+    "good": "良好",
+    "needsWork": "需要改进",
+    "incorrect": "不正确"
+  },
+  "quiz": {
+    "score": "得分：{{score}}%",
+    "passed": "通过！",
+    "needToPass": "需要 70% 才能通过",
+    "retry": "重试",
+    "submitQuiz": "提交测验",
+    "addMore": "添加更多问题（共 {{count}} 题）",
+    "yourAnswer": "你的答案...",
+    "correct": "正确答案：{{answer}}"
+  },
+  "chat": {
+    "askQuestion": "关于这篇论文提问",
+    "citationHint": "回答将包含对具体句子的引用",
+    "placeholder": "关于这篇论文提一个问题...",
+    "analyzing": "正在分析论文..."
+  },
+  "ablation": {
+    "askOwn": "提出你自己的「假设」问题",
+    "placeholder": "如果他们使用了不同的激活函数会怎样？"
+  },
+  "compare": {
+    "title": "对比论文",
+    "selectPrompt": "选择要对比的论文：",
+    "paperA": "论文 A",
+    "paperB": "论文 B",
+    "pickFromLibrary": "论文 B — 从你的文库中选择",
+    "filterPapers": "筛选论文...",
+    "comparison": "论文对比",
+    "generating": "正在生成对比分析...",
+    "sharedConcepts": "共同概念",
+    "approachDifferences": "方法差异",
+    "performance": "性能对比",
+    "historicalContext": "历史背景",
+    "whenToUse": "使用场景",
+    "synthesis": "综合分析",
+    "noMatch": "没有匹配的论文。"
+  },
+  "language": {
+    "en": "English",
+    "zh": "中文"
+  }
+}

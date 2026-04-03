@@ -10,6 +10,7 @@ import PaperList from './components/PaperList/PaperList.jsx';
 import PaperDetail from './components/PaperDetail/PaperDetail.jsx';
 import AddPaperModal from './components/AddPaperModal.jsx';
 import CompareView from './components/CompareView.jsx';
+import ThemeToggle from './components/ThemeToggle.jsx';
 
 const DEFAULT_FILTERS = { query: '', difficulty: [], source: [], sort: 'category' };
 
@@ -21,6 +22,12 @@ export default function App() {
   const [showAddModal, setShowAddModal] = useState(false);
   const [filters, setFilters] = useState(DEFAULT_FILTERS);
   const [compareFrom, setCompareFrom] = useState(null);
+  const [theme, setTheme] = usePersistedState('theme', 'light');
+
+  // Apply theme to document
+  if (typeof document !== 'undefined') {
+    document.documentElement.setAttribute('data-theme', theme);
+  }
 
   const { isGenerating, generateContent } = usePaperContent(generatedContent, setGeneratedContent);
   const { quizState, setAnswer, handleQuizSubmit, resetQuiz } = useQuiz();
@@ -191,6 +198,8 @@ export default function App() {
             onAddPaper={() => setShowAddModal(true)}
             onExport={handleExport}
             onImport={handleImport}
+            theme={theme}
+            onToggleTheme={() => setTheme(t => t === 'light' ? 'dark' : 'light')}
           />
           <SearchBar filters={filters} onFiltersChange={setFilters} />
           <PaperList

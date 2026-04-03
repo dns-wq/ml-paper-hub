@@ -30,7 +30,7 @@ export default function DnaTab({ dna, onDnaGenerated, paper }) {
   const handleGenerate = async () => {
     setLoading(true);
     try {
-      const text = await callClaude(buildDnaPrompt(paper));
+      const text = await callClaude(buildDnaPrompt(paper), 2500, { jsonResponse: true });
       const match = text.match(/\{[\s\S]*\}/);
       if (match) {
         const parsed = JSON.parse(match[0]);

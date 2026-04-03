@@ -1,7 +1,11 @@
 import { useRef } from 'react';
-import { Brain, Plus, Download, Upload } from 'lucide-react';
+import { BookOpen, Plus, Download, Upload } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import ThemeToggle from './ThemeToggle.jsx';
+import LanguagePicker from './LanguagePicker.jsx';
 
-export default function Header({ stats, onAddPaper, onExport, onImport }) {
+export default function Header({ stats, onAddPaper, onExport, onImport, theme, onToggleTheme }) {
+  const { t } = useTranslation();
   const fileInputRef = useRef(null);
 
   const handleImportClick = () => {
@@ -18,27 +22,29 @@ export default function Header({ stats, onAddPaper, onExport, onImport }) {
 
   return (
     <header className="header">
-      <h1><Brain size={28} /> ML Paper Study Hub</h1>
+      <h1><BookOpen size={22} /> {t('app.title')}</h1>
       <div className="header-right">
         <div className="stats-bar">
           <div className="stat">
             <div className="stat-value">{stats.completed}/{stats.total}</div>
-            <div className="stat-label">Completed</div>
+            <div className="stat-label">{t('header.completed')}</div>
           </div>
           <div className="stat">
             <div className="stat-value">{stats.avgScore}%</div>
-            <div className="stat-label">Avg Score</div>
+            <div className="stat-label">{t('header.avgScore')}</div>
           </div>
           <div className="stat">
             <div className="stat-value">{stats.quizzesTaken}</div>
-            <div className="stat-label">Quizzes Taken</div>
+            <div className="stat-label">{t('header.quizzes')}</div>
           </div>
         </div>
         <div className="header-actions">
-          <button className="icon-btn" onClick={onExport} title="Export data">
+          <LanguagePicker />
+          <ThemeToggle theme={theme} onToggle={onToggleTheme} />
+          <button className="icon-btn" onClick={onExport} title={t('header.export')}>
             <Download size={16} />
           </button>
-          <button className="icon-btn" onClick={handleImportClick} title="Import data">
+          <button className="icon-btn" onClick={handleImportClick} title={t('header.import')}>
             <Upload size={16} />
           </button>
           <input
@@ -49,7 +55,7 @@ export default function Header({ stats, onAddPaper, onExport, onImport }) {
             style={{ display: 'none' }}
           />
           <button className="add-paper-btn" onClick={onAddPaper}>
-            <Plus size={18} /> Add Paper
+            <Plus size={16} /> {t('header.addPaper')}
           </button>
         </div>
       </div>
