@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Book, Brain, FlaskConical, HelpCircle, MessageCircle, ExternalLink, Target, Check, Loader2 } from 'lucide-react';
+import { Book, Brain, FlaskConical, HelpCircle, MessageCircle, ExternalLink, Target, Check, Loader2, Trash2 } from 'lucide-react';
 import DifficultyStars from '../common/DifficultyStars.jsx';
 import SummaryTab from './SummaryTab.jsx';
 import TheoryTab from './TheoryTab.jsx';
@@ -25,6 +25,7 @@ export default function PaperDetail({
   askQuestion,
   resetChat,
   onBack,
+  onDelete,
   setProgress
 }) {
   const [activeTab, setActiveTab] = useState('summary');
@@ -113,9 +114,24 @@ export default function PaperDetail({
 
   return (
     <div className="paper-detail">
-      <button className="back-btn" onClick={handleBack}>
-        &larr; Back to Papers
-      </button>
+      <div className="detail-top-bar">
+        <button className="back-btn" onClick={handleBack}>
+          &larr; Back to Papers
+        </button>
+        {paper.source === 'user' && (
+          <button
+            className="delete-btn"
+            onClick={() => {
+              if (window.confirm(`Delete "${paper.title}"?`)) {
+                onDelete(paper.id);
+                onBack();
+              }
+            }}
+          >
+            <Trash2 size={14} /> Delete
+          </button>
+        )}
+      </div>
 
       <div className="paper-header">
         <h1>{paper.title}</h1>

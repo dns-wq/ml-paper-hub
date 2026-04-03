@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ChevronRight, ChevronDown } from 'lucide-react';
 import PaperCard from './PaperCard.jsx';
 
-export default function PaperList({ groupedPapers, progress, onSelectPaper }) {
+export default function PaperList({ groupedPapers, progress, onSelectPaper, resultCount, totalCount, isFiltered }) {
   const [expandedCategories, setExpandedCategories] = useState({});
 
   const toggleCategory = (category) => {
@@ -11,6 +11,18 @@ export default function PaperList({ groupedPapers, progress, onSelectPaper }) {
 
   return (
     <div className="papers-grid">
+      {isFiltered && (
+        <div className="filter-result-count">
+          Showing {resultCount} of {totalCount} papers
+        </div>
+      )}
+
+      {Object.keys(groupedPapers).length === 0 && (
+        <div className="no-results">
+          No papers match your search. Try different keywords or clear filters.
+        </div>
+      )}
+
       {Object.entries(groupedPapers).map(([category, categoryPapers]) => (
         <div key={category} className="category-group">
           <div className="category-header" onClick={() => toggleCategory(category)}>
