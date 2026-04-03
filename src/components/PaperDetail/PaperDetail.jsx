@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Book, Brain, FlaskConical, HelpCircle, MessageCircle, ExternalLink, Target, Check, Loader2, Trash2, Dna, GraduationCap, Scale, FlaskRound } from 'lucide-react';
+import { Book, Brain, FlaskConical, HelpCircle, MessageCircle, ExternalLink, Target, Check, Loader2, Trash2, Dna, GraduationCap, Scale, FlaskRound, GitCompareArrows } from 'lucide-react';
 import DifficultyStars from '../common/DifficultyStars.jsx';
 import SummaryTab from './SummaryTab.jsx';
 import TheoryTab from './TheoryTab.jsx';
@@ -30,6 +30,7 @@ export default function PaperDetail({
   resetChat,
   onBack,
   onDelete,
+  onCompare,
   setProgress,
   onUpdateContent
 }) {
@@ -105,11 +106,16 @@ export default function PaperDetail({
         <button className="back-btn" onClick={handleBack}>
           &larr; Back to Papers
         </button>
-        {paper.source === 'user' && (
-          <button className="delete-btn" onClick={() => { if (window.confirm(`Delete "${paper.title}"?`)) { onDelete(paper.id); onBack(); } }}>
-            <Trash2 size={14} /> Delete
+        <div className="detail-top-actions">
+          <button className="compare-btn" onClick={() => onCompare(paper)}>
+            <GitCompareArrows size={14} /> Compare
           </button>
-        )}
+          {paper.source === 'user' && (
+            <button className="delete-btn" onClick={() => { if (window.confirm(`Delete "${paper.title}"?`)) { onDelete(paper.id); onBack(); } }}>
+              <Trash2 size={14} /> Delete
+            </button>
+          )}
+        </div>
       </div>
 
       <div className="paper-header">

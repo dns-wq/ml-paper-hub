@@ -9,6 +9,7 @@ import SearchBar from './components/SearchBar.jsx';
 import PaperList from './components/PaperList/PaperList.jsx';
 import PaperDetail from './components/PaperDetail/PaperDetail.jsx';
 import AddPaperModal from './components/AddPaperModal.jsx';
+import CompareView from './components/CompareView.jsx';
 
 const DEFAULT_FILTERS = { query: '', difficulty: [], source: [], sort: 'category' };
 
@@ -19,6 +20,7 @@ export default function App() {
   const [selectedPaper, setSelectedPaper] = useState(null);
   const [showAddModal, setShowAddModal] = useState(false);
   const [filters, setFilters] = useState(DEFAULT_FILTERS);
+  const [compareFrom, setCompareFrom] = useState(null);
 
   const { isGenerating, generateContent } = usePaperContent(generatedContent, setGeneratedContent);
   const { quizState, setAnswer, handleQuizSubmit, resetQuiz } = useQuiz();
@@ -147,7 +149,13 @@ export default function App() {
 
   return (
     <div className="app">
-      {selectedPaper ? (
+      {compareFrom ? (
+        <CompareView
+          paperA={compareFrom}
+          papers={papers}
+          onBack={() => setCompareFrom(null)}
+        />
+      ) : selectedPaper ? (
         <PaperDetail
           paper={selectedPaper}
           content={generatedContent[selectedPaper.id] || {}}
@@ -167,6 +175,7 @@ export default function App() {
           resetChat={resetChat}
           onBack={() => setSelectedPaper(null)}
           onDelete={handleDeletePaper}
+          onCompare={(paper) => { setSelectedPaper(null); setCompareFrom(paper); }}
           setProgress={setProgress}
           onUpdateContent={(paperId, field, value) => {
             setGeneratedContent(prev => ({
