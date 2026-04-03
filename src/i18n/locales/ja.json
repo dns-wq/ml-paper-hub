@@ -1,0 +1,157 @@
+{
+  "app": {
+    "title": "Paper Hub"
+  },
+  "header": {
+    "completed": "完了",
+    "avgScore": "平均点",
+    "quizzes": "クイズ",
+    "addPaper": "論文を追加",
+    "export": "データをエクスポート",
+    "import": "データをインポート",
+    "lightMode": "ライトモードに切替",
+    "darkMode": "ダークモードに切替"
+  },
+  "search": {
+    "placeholder": "タイトル、著者、キーワードで検索...",
+    "filters": "フィルター",
+    "difficulty": "難易度",
+    "source": "ソース",
+    "sortBy": "並び替え",
+    "category": "カテゴリ",
+    "titleAZ": "タイトル A-Z",
+    "yearNewest": "年（新しい順）",
+    "yearOldest": "年（古い順）",
+    "clearFilters": "フィルターをクリア",
+    "showing": "{{total}} 件中 {{count}} 件を表示",
+    "noResults": "該当する論文がありません。別のキーワードを試すか、フィルターをクリアしてください。"
+  },
+  "difficulty": {
+    "1": "初級",
+    "2": "中級",
+    "3": "上級",
+    "4": "エキスパート",
+    "5": "研究レベル"
+  },
+  "addModal": {
+    "title": "論文を追加",
+    "search": "検索",
+    "fromUrl": "URLから",
+    "manual": "手動入力",
+    "searchPlaceholder": "{{provider}} で検索...",
+    "urlPlaceholder": "arXiv URL、Semantic Scholar URL、または論文リンクを貼り付け...",
+    "importPaper": "論文をインポート",
+    "fetchingMetadata": "メタデータを取得中...",
+    "noPapersFound": "論文が見つかりません。別のキーワードまたは別のソースを試してください。",
+    "s2Hint": "2億2500万以上の論文をAIによる関連性ランキングで検索。",
+    "openalexHint": "4億5000万以上の学術著作を幅広い国際カバレッジで検索。",
+    "dblpHint": "CCFランクの中国の会議を含む、CS会議とジャーナルを検索。",
+    "urlHint": "arXivとSemantic ScholarのURLに対応。タイトル、著者、要約、引用データを自動取得。",
+    "dblpNoAbstract": "DBLPは要約を提供しません — メタデータのみで論文が追加されます。",
+    "citations": "被引用数 {{count}}"
+  },
+  "detail": {
+    "backToPapers": "論文一覧に戻る",
+    "compare": "比較",
+    "delete": "削除",
+    "original": "原文",
+    "bestScore": "最高スコア：{{score}}%"
+  },
+  "tabs": {
+    "study": "学習",
+    "deepDive": "深掘り",
+    "practice": "演習",
+    "summary": "要約",
+    "theory": "理論",
+    "findings": "発見",
+    "dna": "DNA",
+    "claims": "主張",
+    "whatIf": "もし？",
+    "feynman": "ファインマン",
+    "quiz": "クイズ",
+    "qa": "Q&A"
+  },
+  "content": {
+    "generateSummary": "要約を生成",
+    "generateTheory": "理論分析を生成",
+    "generateFindings": "主要な発見を生成",
+    "generateQuiz": "クイズを生成",
+    "loadMore": "もっと読み込む",
+    "generatingContent": "コンテンツを生成中...",
+    "extractDna": "論文DNAを抽出",
+    "extractingDna": "論文DNAを抽出中...",
+    "extractClaims": "主張を抽出",
+    "extractingClaims": "主張を抽出・分類中...",
+    "analyzeDecisions": "設計判断を分析",
+    "analyzingDecisions": "設計判断を分析中..."
+  },
+  "feynman": {
+    "title": "ファインマンモード",
+    "description": "自分の言葉でコンセプトを説明して理解度をテスト。AIが正確性、完全性、明瞭性を評価します。",
+    "loadConcepts": "コンセプトを読み込む",
+    "loadingConcepts": "コンセプトを読み込み中...",
+    "pickConcept": "説明するコンセプトを選択",
+    "pickDescription": "論文からコンセプトを選び、賢い学部生に教えるように説明してください。",
+    "explain": "説明：",
+    "writePrompt": "この論文を知らない賢い人に教えるつもりで説明を書いてください。",
+    "placeholder": "ここに説明を入力...",
+    "submit": "説明を提出",
+    "evaluating": "評価中...",
+    "pickDifferent": "別のコンセプトを選ぶ",
+    "tryAnother": "別のコンセプトを試す",
+    "accuracy": "正確性",
+    "completeness": "完全性",
+    "clarity": "明瞭性",
+    "modelExplanation": "モデルの説明",
+    "excellent": "優秀",
+    "good": "良好",
+    "needsWork": "改善が必要",
+    "incorrect": "不正確"
+  },
+  "quiz": {
+    "score": "スコア：{{score}}%",
+    "passed": "合格！",
+    "needToPass": "合格には70%が必要",
+    "retry": "再挑戦",
+    "submitQuiz": "クイズを提出",
+    "addMore": "問題を追加（全{{count}}問）",
+    "yourAnswer": "あなたの回答...",
+    "correct": "正解：{{answer}}"
+  },
+  "chat": {
+    "askQuestion": "この論文について質問する",
+    "citationHint": "回答には特定の文の引用が含まれます",
+    "placeholder": "この論文について質問...",
+    "analyzing": "論文を分析中..."
+  },
+  "ablation": {
+    "askOwn": "自分の「もし？」質問をする",
+    "placeholder": "もし別の活性化関数を使っていたら？"
+  },
+  "compare": {
+    "title": "論文を比較",
+    "selectPrompt": "比較する論文を選択：",
+    "paperA": "論文 A",
+    "paperB": "論文 B",
+    "pickFromLibrary": "論文 B — ライブラリから選択",
+    "filterPapers": "論文を絞り込む...",
+    "comparison": "論文比較",
+    "generating": "比較分析を生成中...",
+    "sharedConcepts": "共通コンセプト",
+    "approachDifferences": "アプローチの違い",
+    "performance": "パフォーマンス",
+    "historicalContext": "歴史的背景",
+    "whenToUse": "使い分け",
+    "synthesis": "総合分析",
+    "noMatch": "該当する論文がありません。"
+  },
+  "language": {
+    "en": "English",
+    "zh": "简体中文",
+    "zh-TW": "繁體中文",
+    "fr": "Français",
+    "es": "Español",
+    "ja": "日本語",
+    "ko": "한국어"
+  }
+}

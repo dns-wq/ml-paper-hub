@@ -1,0 +1,157 @@
+{
+  "app": {
+    "title": "Paper Hub"
+  },
+  "header": {
+    "completed": "Terminés",
+    "avgScore": "Score moy.",
+    "quizzes": "Quiz",
+    "addPaper": "Ajouter",
+    "export": "Exporter les données",
+    "import": "Importer les données",
+    "lightMode": "Passer en mode clair",
+    "darkMode": "Passer en mode sombre"
+  },
+  "search": {
+    "placeholder": "Rechercher par titre, auteur ou mot-clé...",
+    "filters": "Filtres",
+    "difficulty": "Difficulté",
+    "source": "Source",
+    "sortBy": "Trier par",
+    "category": "Catégorie",
+    "titleAZ": "Titre A-Z",
+    "yearNewest": "Année (récent)",
+    "yearOldest": "Année (ancien)",
+    "clearFilters": "Effacer tous les filtres",
+    "showing": "Affichage de {{count}} sur {{total}} articles",
+    "noResults": "Aucun article trouvé. Essayez d'autres mots-clés ou effacez les filtres."
+  },
+  "difficulty": {
+    "1": "Débutant",
+    "2": "Intermédiaire",
+    "3": "Avancé",
+    "4": "Expert",
+    "5": "Recherche"
+  },
+  "addModal": {
+    "title": "Ajouter un article",
+    "search": "Rechercher",
+    "fromUrl": "Par URL",
+    "manual": "Manuel",
+    "searchPlaceholder": "Rechercher dans {{provider}}...",
+    "urlPlaceholder": "Collez l'URL arXiv, Semantic Scholar ou lien vers l'article...",
+    "importPaper": "Importer l'article",
+    "fetchingMetadata": "Récupération des métadonnées...",
+    "noPapersFound": "Aucun article trouvé. Essayez d'autres mots-clés ou une autre source.",
+    "s2Hint": "Recherchez parmi plus de 225 millions d'articles avec un classement par pertinence IA.",
+    "openalexHint": "Recherchez parmi plus de 450 millions d'œuvres avec une forte couverture internationale.",
+    "dblpHint": "Recherchez dans les conférences et revues d'informatique, y compris les venues chinoises CCF.",
+    "urlHint": "Prend en charge les URL arXiv et Semantic Scholar. Récupère automatiquement le titre, les auteurs, le résumé et les citations.",
+    "dblpNoAbstract": "DBLP ne fournit pas de résumés — l'article sera ajouté avec les métadonnées uniquement.",
+    "citations": "{{count}} citations"
+  },
+  "detail": {
+    "backToPapers": "Retour aux articles",
+    "compare": "Comparer",
+    "delete": "Supprimer",
+    "original": "Original",
+    "bestScore": "Meilleur score : {{score}}%"
+  },
+  "tabs": {
+    "study": "Étude",
+    "deepDive": "Approfondissement",
+    "practice": "Pratique",
+    "summary": "Résumé",
+    "theory": "Théorie",
+    "findings": "Résultats",
+    "dna": "ADN",
+    "claims": "Affirmations",
+    "whatIf": "Et si ?",
+    "feynman": "Feynman",
+    "quiz": "Quiz",
+    "qa": "Q&R"
+  },
+  "content": {
+    "generateSummary": "Générer le résumé",
+    "generateTheory": "Générer l'analyse théorique",
+    "generateFindings": "Générer les résultats clés",
+    "generateQuiz": "Générer le quiz",
+    "loadMore": "Charger plus",
+    "generatingContent": "Génération du contenu...",
+    "extractDna": "Extraire l'ADN de l'article",
+    "extractingDna": "Extraction de l'ADN...",
+    "extractClaims": "Extraire les affirmations",
+    "extractingClaims": "Extraction et classification des affirmations...",
+    "analyzeDecisions": "Analyser les décisions de conception",
+    "analyzingDecisions": "Analyse des décisions..."
+  },
+  "feynman": {
+    "title": "Mode Feynman",
+    "description": "Testez votre compréhension en expliquant les concepts avec vos propres mots. L'IA évalue la précision, l'exhaustivité et la clarté.",
+    "loadConcepts": "Charger les concepts",
+    "loadingConcepts": "Chargement des concepts...",
+    "pickConcept": "Choisissez un concept à expliquer",
+    "pickDescription": "Choisissez un concept et expliquez-le comme si vous enseigniez à un étudiant brillant.",
+    "explain": "Expliquez :",
+    "writePrompt": "Écrivez votre explication comme pour quelqu'un d'intelligent mais qui ne connaît pas cet article.",
+    "placeholder": "Tapez votre explication ici...",
+    "submit": "Soumettre l'explication",
+    "evaluating": "Évaluation...",
+    "pickDifferent": "Choisir un autre concept",
+    "tryAnother": "Essayer un autre concept",
+    "accuracy": "Précision",
+    "completeness": "Exhaustivité",
+    "clarity": "Clarté",
+    "modelExplanation": "Explication du modèle",
+    "excellent": "Excellent",
+    "good": "Bon",
+    "needsWork": "À améliorer",
+    "incorrect": "Incorrect"
+  },
+  "quiz": {
+    "score": "Score : {{score}}%",
+    "passed": "Réussi !",
+    "needToPass": "70% requis pour réussir",
+    "retry": "Réessayer",
+    "submitQuiz": "Soumettre le quiz",
+    "addMore": "Ajouter des questions ({{count}} au total)",
+    "yourAnswer": "Votre réponse...",
+    "correct": "Correct : {{answer}}"
+  },
+  "chat": {
+    "askQuestion": "Posez des questions sur cet article",
+    "citationHint": "Les réponses incluront des citations de phrases spécifiques",
+    "placeholder": "Posez une question sur cet article...",
+    "analyzing": "Analyse de l'article..."
+  },
+  "ablation": {
+    "askOwn": "Posez votre propre question « Et si ? »",
+    "placeholder": "Et s'ils avaient utilisé une fonction d'activation différente ?"
+  },
+  "compare": {
+    "title": "Comparer les articles",
+    "selectPrompt": "Sélectionnez un article à comparer :",
+    "paperA": "Article A",
+    "paperB": "Article B",
+    "pickFromLibrary": "Article B — choisir dans votre bibliothèque",
+    "filterPapers": "Filtrer les articles...",
+    "comparison": "Comparaison d'articles",
+    "generating": "Génération de l'analyse comparative...",
+    "sharedConcepts": "Concepts partagés",
+    "approachDifferences": "Différences d'approche",
+    "performance": "Performance",
+    "historicalContext": "Contexte historique",
+    "whenToUse": "Quand utiliser chacun",
+    "synthesis": "Synthèse",
+    "noMatch": "Aucun article correspondant."
+  },
+  "language": {
+    "en": "English",
+    "zh": "简体中文",
+    "zh-TW": "繁體中文",
+    "fr": "Français",
+    "es": "Español",
+    "ja": "日本語",
+    "ko": "한국어"
+  }
+}

@@ -1,7 +1,15 @@
 const API_URL = '/api/anthropic/v1/messages';
 const MODEL = 'claude-sonnet-4-20250514';
 
-const LANGUAGE_NAMES = { en: 'English', zh: 'Chinese (Simplified)' };
+const LANGUAGE_NAMES = {
+  en: 'English',
+  zh: 'Chinese (Simplified)',
+  'zh-TW': 'Chinese (Traditional)',
+  fr: 'French',
+  es: 'Spanish',
+  ja: 'Japanese',
+  ko: 'Korean'
+};
 
 /**
  * Returns an instruction to append to prompts when the user's language isn't English.

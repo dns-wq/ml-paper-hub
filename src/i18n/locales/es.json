@@ -1,0 +1,157 @@
+{
+  "app": {
+    "title": "Paper Hub"
+  },
+  "header": {
+    "completed": "Completados",
+    "avgScore": "Prom. Score",
+    "quizzes": "Pruebas",
+    "addPaper": "Agregar",
+    "export": "Exportar datos",
+    "import": "Importar datos",
+    "lightMode": "Cambiar a modo claro",
+    "darkMode": "Cambiar a modo oscuro"
+  },
+  "search": {
+    "placeholder": "Buscar por título, autor o palabra clave...",
+    "filters": "Filtros",
+    "difficulty": "Dificultad",
+    "source": "Fuente",
+    "sortBy": "Ordenar por",
+    "category": "Categoría",
+    "titleAZ": "Título A-Z",
+    "yearNewest": "Año (más reciente)",
+    "yearOldest": "Año (más antiguo)",
+    "clearFilters": "Limpiar todos los filtros",
+    "showing": "Mostrando {{count}} de {{total}} artículos",
+    "noResults": "No se encontraron artículos. Intenta con otras palabras clave o limpia los filtros."
+  },
+  "difficulty": {
+    "1": "Principiante",
+    "2": "Intermedio",
+    "3": "Avanzado",
+    "4": "Experto",
+    "5": "Investigación"
+  },
+  "addModal": {
+    "title": "Agregar artículo",
+    "search": "Buscar",
+    "fromUrl": "Por URL",
+    "manual": "Manual",
+    "searchPlaceholder": "Buscar en {{provider}}...",
+    "urlPlaceholder": "Pega la URL de arXiv, Semantic Scholar o enlace del artículo...",
+    "importPaper": "Importar artículo",
+    "fetchingMetadata": "Obteniendo metadatos...",
+    "noPapersFound": "No se encontraron artículos. Intenta con otras palabras clave u otra fuente.",
+    "s2Hint": "Busca entre más de 225 millones de artículos con clasificación de relevancia por IA.",
+    "openalexHint": "Busca entre más de 450 millones de obras con amplia cobertura internacional.",
+    "dblpHint": "Busca en conferencias y revistas de informática, incluyendo sedes chinas clasificadas por CCF.",
+    "urlHint": "Compatible con URLs de arXiv y Semantic Scholar. Obtiene automáticamente título, autores, resumen y datos de citas.",
+    "dblpNoAbstract": "DBLP no proporciona resúmenes — el artículo se agregará solo con metadatos.",
+    "citations": "{{count}} citas"
+  },
+  "detail": {
+    "backToPapers": "Volver a artículos",
+    "compare": "Comparar",
+    "delete": "Eliminar",
+    "original": "Original",
+    "bestScore": "Mejor puntuación: {{score}}%"
+  },
+  "tabs": {
+    "study": "Estudio",
+    "deepDive": "Profundización",
+    "practice": "Práctica",
+    "summary": "Resumen",
+    "theory": "Teoría",
+    "findings": "Hallazgos",
+    "dna": "ADN",
+    "claims": "Afirmaciones",
+    "whatIf": "¿Y si?",
+    "feynman": "Feynman",
+    "quiz": "Prueba",
+    "qa": "P&R"
+  },
+  "content": {
+    "generateSummary": "Generar resumen",
+    "generateTheory": "Generar análisis teórico",
+    "generateFindings": "Generar hallazgos clave",
+    "generateQuiz": "Generar prueba",
+    "loadMore": "Cargar más",
+    "generatingContent": "Generando contenido...",
+    "extractDna": "Extraer ADN del artículo",
+    "extractingDna": "Extrayendo ADN...",
+    "extractClaims": "Extraer afirmaciones",
+    "extractingClaims": "Extrayendo y clasificando afirmaciones...",
+    "analyzeDecisions": "Analizar decisiones de diseño",
+    "analyzingDecisions": "Analizando decisiones..."
+  },
+  "feynman": {
+    "title": "Modo Feynman",
+    "description": "Pon a prueba tu comprensión explicando conceptos con tus propias palabras. La IA evalúa la precisión, completitud y claridad.",
+    "loadConcepts": "Cargar conceptos",
+    "loadingConcepts": "Cargando conceptos...",
+    "pickConcept": "Elige un concepto para explicar",
+    "pickDescription": "Elige un concepto del artículo y explícalo como si enseñaras a un estudiante brillante.",
+    "explain": "Explica:",
+    "writePrompt": "Escribe tu explicación como para alguien inteligente pero que no conoce este artículo.",
+    "placeholder": "Escribe tu explicación aquí...",
+    "submit": "Enviar explicación",
+    "evaluating": "Evaluando...",
+    "pickDifferent": "Elegir otro concepto",
+    "tryAnother": "Intentar otro concepto",
+    "accuracy": "Precisión",
+    "completeness": "Completitud",
+    "clarity": "Claridad",
+    "modelExplanation": "Explicación del modelo",
+    "excellent": "Excelente",
+    "good": "Bueno",
+    "needsWork": "Necesita mejorar",
+    "incorrect": "Incorrecto"
+  },
+  "quiz": {
+    "score": "Puntuación: {{score}}%",
+    "passed": "¡Aprobado!",
+    "needToPass": "Se necesita 70% para aprobar",
+    "retry": "Reintentar",
+    "submitQuiz": "Enviar prueba",
+    "addMore": "Agregar más preguntas ({{count}} en total)",
+    "yourAnswer": "Tu respuesta...",
+    "correct": "Correcto: {{answer}}"
+  },
+  "chat": {
+    "askQuestion": "Haz preguntas sobre este artículo",
+    "citationHint": "Las respuestas incluirán citas de oraciones específicas",
+    "placeholder": "Haz una pregunta sobre este artículo...",
+    "analyzing": "Analizando artículo..."
+  },
+  "ablation": {
+    "askOwn": "Haz tu propia pregunta «¿Y si?»",
+    "placeholder": "¿Y si hubieran usado una función de activación diferente?"
+  },
+  "compare": {
+    "title": "Comparar artículos",
+    "selectPrompt": "Selecciona un artículo para comparar:",
+    "paperA": "Artículo A",
+    "paperB": "Artículo B",
+    "pickFromLibrary": "Artículo B — elegir de tu biblioteca",
+    "filterPapers": "Filtrar artículos...",
+    "comparison": "Comparación de artículos",
+    "generating": "Generando análisis comparativo...",
+    "sharedConcepts": "Conceptos compartidos",
+    "approachDifferences": "Diferencias de enfoque",
+    "performance": "Rendimiento",
+    "historicalContext": "Contexto histórico",
+    "whenToUse": "Cuándo usar cada uno",
+    "synthesis": "Síntesis",
+    "noMatch": "No se encontraron artículos."
+  },
+  "language": {
+    "en": "English",
+    "zh": "简体中文",
+    "zh-TW": "繁體中文",
+    "fr": "Français",
+    "es": "Español",
+    "ja": "日本語",
+    "ko": "한국어"
+  }
+}

@@ -1,0 +1,157 @@
+{
+  "app": {
+    "title": "論文中心"
+  },
+  "header": {
+    "completed": "已完成",
+    "avgScore": "平均分",
+    "quizzes": "測驗",
+    "addPaper": "新增論文",
+    "export": "匯出資料",
+    "import": "匯入資料",
+    "lightMode": "切換至淺色模式",
+    "darkMode": "切換至深色模式"
+  },
+  "search": {
+    "placeholder": "依標題、作者或關鍵字搜尋論文...",
+    "filters": "篩選",
+    "difficulty": "難度",
+    "source": "來源",
+    "sortBy": "排序方式",
+    "category": "分類",
+    "titleAZ": "標題 A-Z",
+    "yearNewest": "年份（最新）",
+    "yearOldest": "年份（最早）",
+    "clearFilters": "清除所有篩選",
+    "showing": "顯示 {{total}} 篇中的 {{count}} 篇",
+    "noResults": "沒有符合的論文。請嘗試其他關鍵字或清除篩選條件。"
+  },
+  "difficulty": {
+    "1": "入門",
+    "2": "中級",
+    "3": "進階",
+    "4": "專家",
+    "5": "研究級"
+  },
+  "addModal": {
+    "title": "新增論文",
+    "search": "搜尋",
+    "fromUrl": "透過連結",
+    "manual": "手動新增",
+    "searchPlaceholder": "搜尋 {{provider}}...",
+    "urlPlaceholder": "貼上 arXiv 連結、Semantic Scholar 連結或論文網址...",
+    "importPaper": "匯入論文",
+    "fetchingMetadata": "正在取得後設資料...",
+    "noPapersFound": "未找到論文。請嘗試不同的關鍵字或其他資料來源。",
+    "s2Hint": "搜尋超過 2.25 億篇論文，AI 智慧排序。",
+    "openalexHint": "搜尋超過 4.5 億篇學術著作，國際和多語言覆蓋廣泛。",
+    "dblpHint": "搜尋資訊科學研討會和期刊，包含 CCF 推薦的中文會議（NLPCC、CCL 等）。",
+    "urlHint": "支援 arXiv 和 Semantic Scholar 連結。自動取得標題、作者、摘要和引用資料。",
+    "dblpNoAbstract": "DBLP 不提供摘要——論文將僅新增後設資料。",
+    "citations": "{{count}} 次引用"
+  },
+  "detail": {
+    "backToPapers": "返回論文列表",
+    "compare": "比較",
+    "delete": "刪除",
+    "original": "原文",
+    "bestScore": "最高分：{{score}}%"
+  },
+  "tabs": {
+    "study": "學習",
+    "deepDive": "深入研究",
+    "practice": "練習",
+    "summary": "摘要",
+    "theory": "理論",
+    "findings": "發現",
+    "dna": "DNA",
+    "claims": "論點",
+    "whatIf": "假設分析",
+    "feynman": "費曼",
+    "quiz": "測驗",
+    "qa": "問答"
+  },
+  "content": {
+    "generateSummary": "產生摘要",
+    "generateTheory": "產生理論深度分析",
+    "generateFindings": "產生關鍵發現",
+    "generateQuiz": "產生測驗",
+    "loadMore": "載入更多",
+    "generatingContent": "正在產生內容...",
+    "extractDna": "擷取論文 DNA",
+    "extractingDna": "正在擷取論文 DNA...",
+    "extractClaims": "擷取論點",
+    "extractingClaims": "正在擷取和分類論點...",
+    "analyzeDecisions": "分析設計決策",
+    "analyzingDecisions": "正在分析設計決策..."
+  },
+  "feynman": {
+    "title": "費曼模式",
+    "description": "用自己的話解釋概念來測試理解程度。AI 將從準確性、完整性和清晰度三個方面評估你的解釋。",
+    "loadConcepts": "載入概念",
+    "loadingConcepts": "正在載入概念...",
+    "pickConcept": "選擇一個概念來解釋",
+    "pickDescription": "選擇論文中的一個概念，像教一個聰明的大學生那樣解釋它。",
+    "explain": "解釋：",
+    "writePrompt": "寫下你的解釋，假設對方聰明但不了解這篇論文。",
+    "placeholder": "在這裡輸入你的解釋...",
+    "submit": "提交解釋",
+    "evaluating": "正在評估...",
+    "pickDifferent": "選擇其他概念",
+    "tryAnother": "嘗試另一個概念",
+    "accuracy": "準確性",
+    "completeness": "完整性",
+    "clarity": "清晰度",
+    "modelExplanation": "模型解釋",
+    "excellent": "優秀",
+    "good": "良好",
+    "needsWork": "需要改進",
+    "incorrect": "不正確"
+  },
+  "quiz": {
+    "score": "得分：{{score}}%",
+    "passed": "通過！",
+    "needToPass": "需要 70% 才能通過",
+    "retry": "重試",
+    "submitQuiz": "提交測驗",
+    "addMore": "新增更多題目（共 {{count}} 題）",
+    "yourAnswer": "你的答案...",
+    "correct": "正確答案：{{answer}}"
+  },
+  "chat": {
+    "askQuestion": "關於這篇論文提問",
+    "citationHint": "回答將包含對具體句子的引用",
+    "placeholder": "關於這篇論文提一個問題...",
+    "analyzing": "正在分析論文..."
+  },
+  "ablation": {
+    "askOwn": "提出你自己的「假設」問題",
+    "placeholder": "如果他們使用了不同的激活函數會怎樣？"
+  },
+  "compare": {
+    "title": "比較論文",
+    "selectPrompt": "選擇要比較的論文：",
+    "paperA": "論文 A",
+    "paperB": "論文 B",
+    "pickFromLibrary": "論文 B — 從你的文庫中選擇",
+    "filterPapers": "篩選論文...",
+    "comparison": "論文比較",
+    "generating": "正在產生比較分析...",
+    "sharedConcepts": "共同概念",
+    "approachDifferences": "方法差異",
+    "performance": "效能比較",
+    "historicalContext": "歷史背景",
+    "whenToUse": "使用情境",
+    "synthesis": "綜合分析",
+    "noMatch": "沒有符合的論文。"
+  },
+  "language": {
+    "en": "English",
+    "zh": "简体中文",
+    "zh-TW": "繁體中文",
+    "fr": "Français",
+    "es": "Español",
+    "ja": "日本語",
+    "ko": "한국어"
+  }
+}

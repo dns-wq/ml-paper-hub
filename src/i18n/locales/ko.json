@@ -1,0 +1,157 @@
+{
+  "app": {
+    "title": "Paper Hub"
+  },
+  "header": {
+    "completed": "완료",
+    "avgScore": "평균 점수",
+    "quizzes": "퀴즈",
+    "addPaper": "논문 추가",
+    "export": "데이터 내보내기",
+    "import": "데이터 가져오기",
+    "lightMode": "라이트 모드로 전환",
+    "darkMode": "다크 모드로 전환"
+  },
+  "search": {
+    "placeholder": "제목, 저자 또는 키워드로 검색...",
+    "filters": "필터",
+    "difficulty": "난이도",
+    "source": "출처",
+    "sortBy": "정렬",
+    "category": "카테고리",
+    "titleAZ": "제목 A-Z",
+    "yearNewest": "연도 (최신순)",
+    "yearOldest": "연도 (오래된순)",
+    "clearFilters": "모든 필터 지우기",
+    "showing": "전체 {{total}}편 중 {{count}}편 표시",
+    "noResults": "일치하는 논문이 없습니다. 다른 키워드를 시도하거나 필터를 지워주세요."
+  },
+  "difficulty": {
+    "1": "초급",
+    "2": "중급",
+    "3": "고급",
+    "4": "전문가",
+    "5": "연구 수준"
+  },
+  "addModal": {
+    "title": "논문 추가",
+    "search": "검색",
+    "fromUrl": "URL로",
+    "manual": "수동 입력",
+    "searchPlaceholder": "{{provider}}에서 검색...",
+    "urlPlaceholder": "arXiv URL, Semantic Scholar URL 또는 논문 링크를 붙여넣기...",
+    "importPaper": "논문 가져오기",
+    "fetchingMetadata": "메타데이터 가져오는 중...",
+    "noPapersFound": "논문을 찾을 수 없습니다. 다른 키워드나 다른 소스를 시도해주세요.",
+    "s2Hint": "AI 기반 관련성 순위로 2억 2500만 이상의 논문을 검색합니다.",
+    "openalexHint": "광범위한 국제 커버리지로 4억 5000만 이상의 학술 저작물을 검색합니다.",
+    "dblpHint": "CCF 등급 중국 학술대회를 포함한 CS 학술대회 및 저널을 검색합니다.",
+    "urlHint": "arXiv 및 Semantic Scholar URL을 지원합니다. 제목, 저자, 초록, 인용 데이터를 자동으로 가져옵니다.",
+    "dblpNoAbstract": "DBLP는 초록을 제공하지 않습니다 — 메타데이터만으로 논문이 추가됩니다.",
+    "citations": "인용 {{count}}회"
+  },
+  "detail": {
+    "backToPapers": "논문 목록으로 돌아가기",
+    "compare": "비교",
+    "delete": "삭제",
+    "original": "원문",
+    "bestScore": "최고 점수: {{score}}%"
+  },
+  "tabs": {
+    "study": "학습",
+    "deepDive": "심층 분석",
+    "practice": "연습",
+    "summary": "요약",
+    "theory": "이론",
+    "findings": "발견",
+    "dna": "DNA",
+    "claims": "주장",
+    "whatIf": "만약에?",
+    "feynman": "파인만",
+    "quiz": "퀴즈",
+    "qa": "Q&A"
+  },
+  "content": {
+    "generateSummary": "요약 생성",
+    "generateTheory": "이론 분석 생성",
+    "generateFindings": "주요 발견 생성",
+    "generateQuiz": "퀴즈 생성",
+    "loadMore": "더 불러오기",
+    "generatingContent": "콘텐츠 생성 중...",
+    "extractDna": "논문 DNA 추출",
+    "extractingDna": "논문 DNA 추출 중...",
+    "extractClaims": "주장 추출",
+    "extractingClaims": "주장 추출 및 분류 중...",
+    "analyzeDecisions": "설계 결정 분석",
+    "analyzingDecisions": "설계 결정 분석 중..."
+  },
+  "feynman": {
+    "title": "파인만 모드",
+    "description": "자신의 말로 개념을 설명하여 이해도를 테스트합니다. AI가 정확성, 완전성, 명확성을 평가합니다.",
+    "loadConcepts": "개념 불러오기",
+    "loadingConcepts": "개념 불러오는 중...",
+    "pickConcept": "설명할 개념을 선택하세요",
+    "pickDescription": "논문에서 개념을 선택하고 똑똑한 학부생에게 가르치듯이 설명해주세요.",
+    "explain": "설명:",
+    "writePrompt": "이 논문을 모르는 똑똑한 사람에게 가르치듯이 설명을 작성해주세요.",
+    "placeholder": "여기에 설명을 입력...",
+    "submit": "설명 제출",
+    "evaluating": "평가 중...",
+    "pickDifferent": "다른 개념 선택",
+    "tryAnother": "다른 개념 시도",
+    "accuracy": "정확성",
+    "completeness": "완전성",
+    "clarity": "명확성",
+    "modelExplanation": "모델 설명",
+    "excellent": "우수",
+    "good": "양호",
+    "needsWork": "개선 필요",
+    "incorrect": "부정확"
+  },
+  "quiz": {
+    "score": "점수: {{score}}%",
+    "passed": "합격!",
+    "needToPass": "합격하려면 70%가 필요합니다",
+    "retry": "다시 시도",
+    "submitQuiz": "퀴즈 제출",
+    "addMore": "문제 추가 (총 {{count}}문제)",
+    "yourAnswer": "당신의 답...",
+    "correct": "정답: {{answer}}"
+  },
+  "chat": {
+    "askQuestion": "이 논문에 대해 질문하기",
+    "citationHint": "답변에는 특정 문장의 인용이 포함됩니다",
+    "placeholder": "이 논문에 대해 질문하기...",
+    "analyzing": "논문 분석 중..."
+  },
+  "ablation": {
+    "askOwn": "나만의 '만약에?' 질문하기",
+    "placeholder": "만약 다른 활성화 함수를 사용했다면?"
+  },
+  "compare": {
+    "title": "논문 비교",
+    "selectPrompt": "비교할 논문을 선택하세요:",
+    "paperA": "논문 A",
+    "paperB": "논문 B",
+    "pickFromLibrary": "논문 B — 라이브러리에서 선택",
+    "filterPapers": "논문 필터링...",
+    "comparison": "논문 비교",
+    "generating": "비교 분석 생성 중...",
+    "sharedConcepts": "공통 개념",
+    "approachDifferences": "접근 방식 차이",
+    "performance": "성능",
+    "historicalContext": "역사적 맥락",
+    "whenToUse": "사용 시기",
+    "synthesis": "종합 분석",
+    "noMatch": "일치하는 논문이 없습니다."
+  },
+  "language": {
+    "en": "English",
+    "zh": "简体中文",
+    "zh-TW": "繁體中文",
+    "fr": "Français",
+    "es": "Español",
+    "ja": "日本語",
+    "ko": "한국어"
+  }
+}
