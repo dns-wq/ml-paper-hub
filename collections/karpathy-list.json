@@ -1,0 +1,128 @@
+{
+  "name": "Andrej Karpathy's Reading List",
+  "description": "Essential ML papers curated by Andrej Karpathy. Focuses on language models, GPT series, retrieval-augmented generation, alignment, and analysis.",
+  "curator": "Andrej Karpathy",
+  "papers": [
+    {
+      "id": "scaling-laws",
+      "title": "Scaling Laws for Neural Language Models",
+      "authors": "Kaplan et al. (OpenAI)",
+      "year": 2020,
+      "category": "Scaling",
+      "difficulty": 3,
+      "url": "https://arxiv.org/abs/2001.08361",
+      "source": "both",
+      "abstract": "Empirical study showing power-law relationships between model performance and size, data, and compute."
+    },
+    {
+      "id": "gpt2",
+      "title": "Language Models are Unsupervised Multitask Learners",
+      "authors": "Radford et al. (OpenAI)",
+      "year": 2019,
+      "category": "Language Models",
+      "difficulty": 2,
+      "url": "https://d4mucfpksywv.cloudfront.net/better-language-models/language_models_are_unsupervised_multitask_learners.pdf",
+      "source": "karpathy",
+      "abstract": "GPT-2 paper showing that language models can perform many tasks zero-shot through next-token prediction."
+    },
+    {
+      "id": "gpt3",
+      "title": "Language Models are Few-Shot Learners",
+      "authors": "Brown et al. (OpenAI)",
+      "year": 2020,
+      "category": "Language Models",
+      "difficulty": 3,
+      "url": "https://arxiv.org/abs/2005.14165",
+      "source": "karpathy",
+      "abstract": "GPT-3 paper demonstrating emergent few-shot learning capabilities at scale."
+    },
+    {
+      "id": "instructgpt",
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Ouyang et al. (OpenAI)",
+      "year": 2022,
+      "category": "Alignment",
+      "difficulty": 3,
+      "url": "https://arxiv.org/abs/2203.02155",
+      "source": "karpathy",
+      "abstract": "InstructGPT/RLHF paper showing how to align language models with human intent."
+    },
+    {
+      "id": "llava",
+      "title": "Visual Instruction Tuning (LLaVA)",
+      "authors": "Liu et al.",
+      "year": 2023,
+      "category": "Multimodal",
+      "difficulty": 3,
+      "url": "https://arxiv.org/abs/2304.08485",
+      "source": "karpathy",
+      "abstract": "Large Language and Vision Assistant combining vision encoders with LLMs."
+    },
+    {
+      "id": "dense-passage-retrieval",
+      "title": "Dense Passage Retrieval for Open-Domain Question Answering",
+      "authors": "Karpukhin et al. (Facebook)",
+      "year": 2020,
+      "category": "Retrieval",
+      "difficulty": 3,
+      "url": "https://arxiv.org/abs/2004.04906",
+      "source": "both",
+      "abstract": "Introduces DPR for dense retrieval outperforming sparse methods like BM25."
+    },
+    {
+      "id": "rag",
+      "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+      "authors": "Lewis et al. (Facebook)",
+      "year": 2020,
+      "category": "Retrieval",
+      "difficulty": 3,
+      "url": "https://arxiv.org/abs/2005.11401",
+      "source": "both",
+      "abstract": "Combines retrieval with generation for knowledge-grounded language models."
+    },
+    {
+      "id": "zephyr",
+      "title": "Zephyr: Direct Distillation of LM Alignment",
+      "authors": "Tunstall et al. (HuggingFace)",
+      "year": 2023,
+      "category": "Alignment",
+      "difficulty": 3,
+      "url": "https://arxiv.org/abs/2310.16944",
+      "source": "both",
+      "abstract": "Distilled DPO approach for aligning small LMs without human feedback."
+    },
+    {
+      "id": "lost-in-middle",
+      "title": "Lost in the Middle: How Language Models Use Long Contexts",
+      "authors": "Liu et al. (Stanford)",
+      "year": 2023,
+      "category": "Analysis",
+      "difficulty": 2,
+      "url": "https://arxiv.org/abs/2307.03172",
+      "source": "both",
+      "abstract": "Reveals U-shaped attention pattern where LLMs struggle with middle context."
+    },
+    {
+      "id": "alphago",
+      "title": "Mastering the game of Go with deep neural networks and tree search",
+      "authors": "Silver et al. (DeepMind)",
+      "year": 2016,
+      "category": "Reinforcement Learning",
+      "difficulty": 4,
+      "url": "https://www.nature.com/articles/nature16961",
+      "source": "karpathy",
+      "abstract": "AlphaGo: First program to defeat a professional Go player."
+    },
+    {
+      "id": "multi-token-prediction",
+      "title": "Better & Faster Large Language Models via Multi-token Prediction",
+      "authors": "Gloeckle et al. (Meta)",
+      "year": 2024,
+      "category": "Language Models",
+      "difficulty": 3,
+      "url": "https://arxiv.org/abs/2404.19737",
+      "source": "both",
+      "abstract": "Training LLMs to predict multiple tokens simultaneously for efficiency."
+    }
+  ]
+}
